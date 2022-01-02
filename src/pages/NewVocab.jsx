@@ -1,0 +1,63 @@
+import React, { useCallback, useState } from "react";
+import axios from "../axios";
+import Spinner from "../components/Spinner";
+
+const userId = "61cb0820d994c4ed4de079dc";
+function NewVocab() {
+  const [english, setEnglish] = useState("");
+  const [indonesia, setIndonesia] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const addVocabulary = useCallback(
+    async (data) => {
+      try {
+        setLoading(true);
+        await axios.post("/vocabularies", {
+          userId,
+          english,
+          indonesia,
+        });
+        setLoading(false);
+        setIndonesia("");
+        setEnglish("");
+      } catch (err) {
+        console.log(err);
+      }
+    },
+    [indonesia, english]
+  );
+
+  return (
+    <div className="flex items-center mx-auto w-[30%]  justify-center h-screen max-h-[600px]">
+      <div className="flex flex-col w-full">
+        <div className="mb-10">
+          <label className="block text-2xl mb-6">Inggris</label>
+          <input
+            type="text"
+            className=" bg-transparent outline-none border-b-2 border-gray-400 focus:border-primary transition-all duration-300 w-full text-center text-xl text-primary"
+            value={english}
+            onChange={(e) => setEnglish(e.target.value)}
+          />
+        </div>
+        <div className="mb-10">
+          <label className="block text-2xl mb-6">Indonesia</label>
+          <input
+            type="text"
+            className=" bg-transparent outline-none border-b-2 border-gray-400 focus:border-primary transition-all duration-300 w-full text-center text-xl text-primary"
+            value={indonesia}
+            onChange={(e) => setIndonesia(e.target.value)}
+          />
+        </div>
+        <button
+          className="bg-primary py-3 px-10 text-white rounded-md hover:shadow-lg transition-all duration-100 disabled:opacity-75 "
+          onClick={() => addVocabulary()}
+          disabled={loading}
+        >
+          {loading ? <Spinner /> : "Tambah"}
+        </button>
+      </div>
+    </div>
+  );
+}
+
+export default NewVocab;

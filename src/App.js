@@ -18,7 +18,7 @@ function App() {
     if (localStorage.getItem("kataku_token")) {
       dispatch(fetchUser());
     }
-  }, []);
+  }, [dispatch]);
   return (
     <div className="App">
       <Routes>

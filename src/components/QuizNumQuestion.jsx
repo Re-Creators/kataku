@@ -36,7 +36,7 @@ function QuizNumQuestion({ startQuiz, setNumQuestion }) {
           <div className="my-10 w-1/2">
             <input
               type="number"
-              max={10}
+              max={maxQuiz}
               min={1}
               value={numQuiz}
               onChange={(e) => setNumQuiz(e.target.value)}

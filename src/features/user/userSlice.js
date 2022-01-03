@@ -88,7 +88,6 @@ const userSlice = createSlice({
       return state;
     },
     logout: (state) => {
-      state.user = null;
       localStorage.clear("kataku_token");
       window.location.href = "http://localhost:3000/login";
     },

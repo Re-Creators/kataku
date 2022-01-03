@@ -1,10 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { CSSTransition } from "react-transition-group";
 import Sidebar from "../components/Sidebar";
 import Topbar from "../components/Topbar";
 import Overlay from "../components/Overlay";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { userSelector } from "../features/user/userSlice";
 
 function MainLayout() {

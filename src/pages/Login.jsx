@@ -6,6 +6,7 @@ import { IoMdLock } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import { userSelector, login, clearState } from "../features/user/userSlice";
 import { useNavigate } from "react-router-dom";
+import Spinner from "../components/Spinner";
 
 function Login() {
   const dispatch = useDispatch();
@@ -31,7 +32,7 @@ function Login() {
       dispatch(clearState());
       navigate("/");
     }
-  }, [isError, isSuccess]);
+  }, [isError, isSuccess, navigate, dispatch]);
   return (
     <div className="flex justify-center items-center min-h-screen">
       <div className="w-2/5 py-5 px-10 bg-white flex flex-col rounded-md shadow-lg">
@@ -89,8 +90,9 @@ function Login() {
               <button
                 type="submit"
                 className="w-full py-3 bg-primary rounded-md text-white cursor-pointer"
+                disabled={isFetching}
               >
-                Masuk
+                {isFetching ? <Spinner /> : "Masuk"}
               </button>
             </div>
           </form>

@@ -8,6 +8,7 @@ import { signup } from "../features/user/userSlice";
 import { userSelector } from "../features/user/userSlice";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
+import Spinner from "../components/Spinner";
 
 function Register() {
   const dispatch = useDispatch();
@@ -100,11 +101,13 @@ function Register() {
               </p>
             )}
             <div className="flex items-center  mt-10 justify-center">
-              <input
+              <button
                 type="submit"
                 className="w-full py-3 bg-primary rounded-md text-white cursor-pointer"
-                value="Daftar"
-              />
+                disabled={isFetching}
+              >
+                {isFetching ? <Spinner /> : "Masuk"}
+              </button>
             </div>
           </form>
         </div>

@@ -5,12 +5,15 @@ import { useDispatch } from "react-redux";
 import { getVocabularies } from "../features/vocabulary/vocabularySlice";
 import { vocabularySelector } from "../features/vocabulary/vocabularySlice";
 import { useSelector } from "react-redux";
+import ModalContainer from "../components/modals/ModalContainer";
+import EditVocabularyModal from "../components/modals/EditVocabularyModal";
 
 const editModeClass = " transform translate-x-6";
 
 function VocabularyList() {
   const dispatch = useDispatch();
   const { data: vocabularies, isFetching } = useSelector(vocabularySelector);
+
   const [editMode, setEditMode] = useState(false);
 
   useEffect(() => {
@@ -19,6 +22,9 @@ function VocabularyList() {
 
   return (
     <div className="mt-10 w-4/5 mx-auto pb-10">
+      <ModalContainer>
+        <EditVocabularyModal />
+      </ModalContainer>
       <h1 className="text-3xl">Daftar Kosakata</h1>
       <div className="flex flex-col">
         <div className="flex justify-between mt-5 ">
@@ -54,7 +60,7 @@ function VocabularyList() {
           </div>
         ) : (
           <div className="mt-5 flex flex-wrap gap-5">
-            {vocabularies.map((vocabulary) => (
+            {vocabularies?.map((vocabulary) => (
               <VocabularyCard
                 id={vocabulary._id}
                 date={vocabulary.createdAt}

@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { BsCalendar3 } from "react-icons/bs";
 import { BiPencil } from "react-icons/bi";
 import { BiTrash } from "react-icons/bi";
 import axios from "../axios";
 import { getVocabularies } from "../features/vocabulary/vocabularySlice";
 import { useDispatch } from "react-redux";
+import { toggleModal } from "../features/modal/modalSlice";
 
 function VocabularyCard({ id, date, english, indonesia, editMode }) {
   const dispatch = useDispatch();
@@ -41,7 +42,7 @@ function VocabularyCard({ id, date, english, indonesia, editMode }) {
       {editMode && (
         <div className="absolute top-4 right-5 flex gap-3 text-gray-500">
           <button title="Edit">
-            <BiPencil />
+            <BiPencil onClick={() => dispatch(toggleModal())} />
           </button>
           <button title="Hapus" onClick={() => deleteVocabulary()}>
             <BiTrash />

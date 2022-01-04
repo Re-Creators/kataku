@@ -3,8 +3,12 @@ import { BsCalendar3 } from "react-icons/bs";
 import { BiPencil } from "react-icons/bi";
 import { BiTrash } from "react-icons/bi";
 import axios from "../axios";
+import { getVocabularies } from "../features/vocabulary/vocabularySlice";
+import { useDispatch } from "react-redux";
 
 function VocabularyCard({ id, date, english, indonesia, editMode }) {
+  const dispatch = useDispatch();
+
   const isToday = () => {
     return new Date(date).toDateString() === new Date().toDateString();
   };
@@ -12,6 +16,7 @@ function VocabularyCard({ id, date, english, indonesia, editMode }) {
   const deleteVocabulary = async () => {
     try {
       await axios.delete(`/vocabularies/${id}`);
+      dispatch(getVocabularies());
     } catch (err) {
       console.log(err);
     }

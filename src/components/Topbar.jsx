@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import { BiMenu } from "react-icons/bi";
+import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout } from "../features/user/userSlice";
+import { userSelector } from "../features/user/userSlice";
 
 function Topbar({ toggleSidebar }) {
   const [showUserOption, setShowUserOption] = useState(false);
   const dispatch = useDispatch();
+  const { user } = useSelector(userSelector);
 
   return (
     <div className="w-full px-10 py-5 flex justify-between items-center">
@@ -26,10 +29,10 @@ function Topbar({ toggleSidebar }) {
             onClick={() => setShowUserOption((oldVal) => !oldVal)}
           />
           <p
-            className="cursor-pointer"
+            className="cursor-pointer capitalize"
             onClick={() => setShowUserOption((oldVal) => !oldVal)}
           >
-            Rie Takahasi
+            {user?.username}
           </p>
         </div>
 

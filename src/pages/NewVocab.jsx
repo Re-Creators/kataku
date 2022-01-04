@@ -1,15 +1,18 @@
 import React, { useCallback, useState } from "react";
 import axios from "../axios";
+import Notification from "../components/Notification";
 import Spinner from "../components/Spinner";
+import { CSSTransition } from "react-transition-group";
 
 const userId = "61cb0820d994c4ed4de079dc";
 function NewVocab() {
   const [english, setEnglish] = useState("");
   const [indonesia, setIndonesia] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showNotif, setShowNotif] = useState(false);
 
-  const addVocabulary = useCallback(
-    async (data) => {
+  const addVocabulary = useCallback(async () => {
+    if (indonesia !== "" && english !== "") {
       try {
         setLoading(true);
         await axios.post("/vocabularies", {
@@ -18,17 +21,32 @@ function NewVocab() {
           indonesia,
         });
         setLoading(false);
+        triggerNotification();
         setIndonesia("");
         setEnglish("");
       } catch (err) {
         console.log(err);
       }
-    },
-    [indonesia, english]
-  );
+    }
+  }, [indonesia, english]);
 
+  function triggerNotification() {
+    setShowNotif(true);
+
+    setTimeout(() => {
+      setShowNotif(false);
+    }, 1500);
+  }
   return (
-    <div className="flex items-center mx-auto w-[30%]  justify-center h-screen max-h-[600px]">
+    <div className="flex items-center mx-auto w-[30%]  justify-center h-screen min-h-[400px] max-h-[600px]">
+      <CSSTransition
+        in={showNotif}
+        timeout={500}
+        classNames="slideY"
+        unmountOnExit
+      >
+        <Notification />
+      </CSSTransition>
       <div className="flex flex-col w-full">
         <div className="mb-10">
           <label className="block text-2xl mb-6">Inggris</label>

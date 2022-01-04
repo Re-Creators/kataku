@@ -39,7 +39,7 @@ function Quiz() {
 
   if (loading) return <Spinner />;
   return (
-    <div className="flex items-center mx-auto w-full  justify-center h-screen max-h-[600px]">
+    <div className="flex items-center mx-auto w-full  justify-center h-screen min-h-[400px] max-h-[600px]">
       {!isFinished ? (
         isStart && questions.length > 0 ? (
           <Question

@@ -31,6 +31,24 @@ body {
   transition: all 300ms ease-in-out 0s;
 }
 
+.slideY-enter {
+  opacity: 0;
+  transform: translateY(-100px);
+}
+.slideY-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 500ms ease-in-out 0s;
+}
+.slideY-exit {
+  opacity: 1;
+}
+.slideY-exit-active {
+  opacity: 0;
+  transform: translateY(-100px);
+  transition: all 500ms ease-in-out 0s;
+}
+
 .fade-enter {
   opacity: 0;
 }

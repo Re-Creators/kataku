@@ -34,7 +34,7 @@ function Login() {
     }
   }, [isError, isSuccess, navigate, dispatch]);
   return (
-    <div className="flex justify-center items-center min-h-screen">
+    <div className="flex justify-center items-center h-screen min-h-[600px]">
       <div className="w-2/5 py-5 px-10 bg-white flex flex-col rounded-md shadow-lg">
         <div className="w-32 self-center">
           <Link to="/">

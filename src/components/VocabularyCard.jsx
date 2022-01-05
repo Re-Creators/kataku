@@ -1,8 +1,6 @@
 import { BsCalendar3 } from "react-icons/bs";
 import { BiPencil } from "react-icons/bi";
 import { BiTrash } from "react-icons/bi";
-import axios from "../axios";
-import { getVocabularies } from "../features/vocabulary/vocabularySlice";
 import { useDispatch } from "react-redux";
 import { setSelectedVocabulary } from "../features/vocabulary/vocabularySlice";
 

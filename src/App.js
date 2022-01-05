@@ -1,8 +1,5 @@
-import { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import NewVocab from "./pages/NewVocab";
-import { fetchUser } from "./features/user/userSlice";
-import { useDispatch } from "react-redux";
 import VocabularyList from "./pages/VocabularyList";
 import Quiz from "./pages/Quiz";
 import MainLayout from "./layouts/MainLayout";
@@ -12,13 +9,6 @@ import Register from "./pages/Register";
 import PublicLayout from "./layouts/PublicLayout";
 
 function App() {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (localStorage.getItem("kataku_token")) {
-      dispatch(fetchUser());
-    }
-  }, [dispatch]);
   return (
     <div className="App">
       <Routes>

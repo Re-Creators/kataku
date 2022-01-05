@@ -593,6 +593,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   display: flex;
 }
 
+.hidden {
+  display: none;
+}
+
 .h-full {
   height: 100%;
 }
@@ -619,10 +623,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .h-4 {
   height: 1rem;
-}
-
-.h-32 {
-  height: 8rem;
 }
 
 .max-h-\[600px\] {
@@ -795,10 +795,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   border-radius: 9999px;
 }
 
-.rounded-sm {
-  border-radius: 0.125rem;
-}
-
 .border-4 {
   border-width: 4px;
 }
@@ -864,10 +860,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .p-5 {
   padding: 1.25rem;
-}
-
-.p-3 {
-  padding: 0.75rem;
 }
 
 .p-10 {
@@ -1157,10 +1149,6 @@ body {
 .focus\:border-primary:focus {
   --tw-border-opacity: 1;
   border-color: rgb(98 60 234 / var(--tw-border-opacity));
-}
-
-.focus\:outline-primary:focus {
-  outline-color: #623CEA;
 }
 
 .disabled\:opacity-75:disabled {

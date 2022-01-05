@@ -1,20 +1,21 @@
 import { CSSTransition } from "react-transition-group";
 import { createPortal } from "react-dom";
-import { selectModal } from "../../features/modal/modalSlice";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { toggleModal } from "../../features/modal/modalSlice";
+import { useEffect } from "react";
 
-function ModalContainer({ show, onClose, children }) {
-  const isModalOpen = useSelector(selectModal);
-  const dispatch = useDispatch();
-
+function ModalContainer({ isModalOpen, transitionName, onCLose, children }) {
+  useEffect(() => {
+    if (isModalOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+  }, [isModalOpen]);
   return createPortal(
     <>
       <CSSTransition
         in={isModalOpen}
         timeout={300}
-        classNames="fade"
+        classNames={transitionName}
         unmountOnExit
       >
         {children}
@@ -27,10 +28,9 @@ function ModalContainer({ show, onClose, children }) {
       >
         <div
           className="absolute z-10 inset-0 bg-[rgba(0,0,0,0.6)]"
-          onClick={() => dispatch(toggleModal())}
+          onClick={() => onCLose()}
         ></div>
       </CSSTransition>
-      ;
     </>,
     document.getElementById("portal")
   );

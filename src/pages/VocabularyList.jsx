@@ -13,7 +13,7 @@ const editModeClass = " transform translate-x-6";
 function VocabularyList() {
   const dispatch = useDispatch();
   const { data: vocabularies, isFetching } = useSelector(vocabularySelector);
-
+  const [showEditModal, setShowEditModal] = useState(false);
   const [editMode, setEditMode] = useState(false);
 
   useEffect(() => {
@@ -22,7 +22,11 @@ function VocabularyList() {
 
   return (
     <div className="mt-10 w-4/5 mx-auto pb-10">
-      <ModalContainer>
+      <ModalContainer
+        transitionName="fade"
+        isModalOpen={showEditModal}
+        onCLose={() => setShowEditModal(false)}
+      >
         <EditVocabularyModal />
       </ModalContainer>
       <h1 className="text-3xl">Daftar Kosakata</h1>
@@ -65,6 +69,7 @@ function VocabularyList() {
                 vocabulary={vocabulary}
                 key={vocabulary._id}
                 editMode={editMode}
+                toggleEditModal={() => setShowEditModal(true)}
               />
             ))}
           </div>

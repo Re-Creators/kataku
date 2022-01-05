@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { Navigate, Outlet, useLocation } from "react-router-dom";
-import { CSSTransition } from "react-transition-group";
 import Sidebar from "../components/Sidebar";
 import Topbar from "../components/Topbar";
-import Overlay from "../components/Overlay";
 import { useSelector } from "react-redux";
 import { userSelector } from "../features/user/userSlice";
+import ModalContainer from "../components/modals/ModalContainer";
 
 function MainLayout() {
   const [toggleSidebar, seToggleSidebar] = useState(false);
@@ -18,23 +17,16 @@ function MainLayout() {
   return (
     <>
       <Topbar toggleSidebar={() => seToggleSidebar(true)} />
-      <CSSTransition
-        in={toggleSidebar}
-        timeout={300}
-        classNames="slide"
-        unmountOnExit
+
+      <ModalContainer
+        onCLose={() => seToggleSidebar(false)}
+        transitionName="slide"
+        isModalOpen={toggleSidebar}
       >
         <Sidebar toggleSidebar={() => seToggleSidebar(false)} />
-      </CSSTransition>
+      </ModalContainer>
+
       <Outlet />
-      <CSSTransition
-        in={toggleSidebar}
-        timeout={300}
-        classNames="fade"
-        unmountOnExit
-      >
-        <Overlay />
-      </CSSTransition>
     </>
   );
 }

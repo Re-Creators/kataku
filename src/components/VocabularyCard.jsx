@@ -6,21 +6,26 @@ import axios from "../axios";
 import { getVocabularies } from "../features/vocabulary/vocabularySlice";
 import { useDispatch } from "react-redux";
 import { toggleModal } from "../features/modal/modalSlice";
+import { setSelectedVocabulary } from "../features/vocabulary/vocabularySlice";
 
-function VocabularyCard({ id, date, english, indonesia, editMode }) {
+function VocabularyCard({ vocabulary, editMode }) {
   const dispatch = useDispatch();
 
-  const isToday = () => {
-    return new Date(date).toDateString() === new Date().toDateString();
-  };
+  const isToday = () =>
+    new Date(vocabulary.createdAt).toDateString() === new Date().toDateString();
 
   const deleteVocabulary = async () => {
     try {
-      await axios.delete(`/vocabularies/${id}`);
+      await axios.delete(`/vocabularies/${vocabulary._id}`);
       dispatch(getVocabularies());
     } catch (err) {
       console.log(err);
     }
+  };
+
+  const onEdit = () => {
+    dispatch(setSelectedVocabulary(vocabulary));
+    dispatch(toggleModal());
   };
 
   return (
@@ -42,7 +47,7 @@ function VocabularyCard({ id, date, english, indonesia, editMode }) {
       {editMode && (
         <div className="absolute top-4 right-5 flex gap-3 text-gray-500">
           <button title="Edit">
-            <BiPencil onClick={() => dispatch(toggleModal())} />
+            <BiPencil onClick={() => onEdit()} />
           </button>
           <button title="Hapus" onClick={() => deleteVocabulary()}>
             <BiTrash />
@@ -52,11 +57,13 @@ function VocabularyCard({ id, date, english, indonesia, editMode }) {
 
       <div className="flex items-center text-gray-400 gap-2">
         <BsCalendar3 fontSize={14} />
-        <span className="text-xs">{date.substr(0, 10)}</span>
+        <span className="text-xs">{vocabulary.createdAt.substr(0, 10)}</span>
       </div>
       <div className="flex items-center justify-center mt-8 flex-col">
-        <div className="text-4xl text-primary font-bold">{english}</div>
-        <div className="text-2xl  font-bold mt-4">{indonesia}</div>
+        <div className="text-4xl text-primary font-bold">
+          {vocabulary.english}
+        </div>
+        <div className="text-2xl  font-bold mt-4">{vocabulary.indonesia}</div>
       </div>
     </div>
   );

@@ -11,7 +11,14 @@ function ModalContainer({ show, onClose, children }) {
 
   return createPortal(
     <>
-      {children}
+      <CSSTransition
+        in={isModalOpen}
+        timeout={300}
+        classNames="fade"
+        unmountOnExit
+      >
+        {children}
+      </CSSTransition>
       <CSSTransition
         in={isModalOpen}
         timeout={300}

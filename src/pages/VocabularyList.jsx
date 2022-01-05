@@ -62,11 +62,8 @@ function VocabularyList() {
           <div className="mt-5 flex flex-wrap gap-5">
             {vocabularies?.map((vocabulary) => (
               <VocabularyCard
-                id={vocabulary._id}
-                date={vocabulary.createdAt}
+                vocabulary={vocabulary}
                 key={vocabulary._id}
-                indonesia={vocabulary.indonesia}
-                english={vocabulary.english}
                 editMode={editMode}
               />
             ))}

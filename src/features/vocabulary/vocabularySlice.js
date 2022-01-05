@@ -4,6 +4,7 @@ import axios from "../../axios";
 const initialState = {
   isFetching: false,
   data: null,
+  selectedVocabulary: null,
 };
 
 export const getVocabularies = createAsyncThunk(
@@ -22,7 +23,11 @@ export const getVocabularies = createAsyncThunk(
 export const vocabularySlice = createSlice({
   name: "vocabulary",
   initialState,
-  reducers: {},
+  reducers: {
+    setSelectedVocabulary: (state, { payload }) => {
+      state.selectedVocabulary = payload;
+    },
+  },
   extraReducers: {
     [getVocabularies.pending]: (state) => {
       state.isFetching = true;
@@ -34,5 +39,6 @@ export const vocabularySlice = createSlice({
   },
 });
 
+export const { setSelectedVocabulary } = vocabularySlice.actions;
 export const vocabularySelector = (state) => state.vocabulary;
 export default vocabularySlice.reducer;

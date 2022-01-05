@@ -6,19 +6,20 @@ import { getVocabularies } from "../features/vocabulary/vocabularySlice";
 import { useDispatch } from "react-redux";
 import { setSelectedVocabulary } from "../features/vocabulary/vocabularySlice";
 
-function VocabularyCard({ vocabulary, toggleEditModal, editMode }) {
+function VocabularyCard({
+  vocabulary,
+  toggleEditModal,
+  toggleDelModal,
+  editMode,
+}) {
   const dispatch = useDispatch();
 
   const isToday = () =>
     new Date(vocabulary.createdAt).toDateString() === new Date().toDateString();
 
-  const deleteVocabulary = async () => {
-    try {
-      await axios.delete(`/vocabularies/${vocabulary._id}`);
-      dispatch(getVocabularies());
-    } catch (err) {
-      console.log(err);
-    }
+  const onDelete = () => {
+    dispatch(setSelectedVocabulary(vocabulary));
+    toggleDelModal(vocabulary);
   };
 
   const onEdit = () => {
@@ -47,7 +48,7 @@ function VocabularyCard({ vocabulary, toggleEditModal, editMode }) {
           <button title="Edit">
             <BiPencil onClick={() => onEdit()} />
           </button>
-          <button title="Hapus" onClick={() => deleteVocabulary()}>
+          <button title="Hapus" onClick={() => onDelete()}>
             <BiTrash />
           </button>
         </div>

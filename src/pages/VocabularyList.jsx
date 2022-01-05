@@ -7,6 +7,7 @@ import { vocabularySelector } from "../features/vocabulary/vocabularySlice";
 import { useSelector } from "react-redux";
 import ModalContainer from "../components/modals/ModalContainer";
 import EditVocabularyModal from "../components/modals/EditVocabularyModal";
+import DeleteVocabularyModal from "../components/modals/DeleteVocabularyModal";
 
 const editModeClass = " transform translate-x-6";
 
@@ -14,6 +15,7 @@ function VocabularyList() {
   const dispatch = useDispatch();
   const { data: vocabularies, isFetching } = useSelector(vocabularySelector);
   const [showEditModal, setShowEditModal] = useState(false);
+  const [showDelModal, setShowDelModal] = useState(false);
   const [editMode, setEditMode] = useState(false);
 
   useEffect(() => {
@@ -28,6 +30,13 @@ function VocabularyList() {
         onCLose={() => setShowEditModal(false)}
       >
         <EditVocabularyModal />
+      </ModalContainer>
+      <ModalContainer
+        transitionName="fade"
+        isModalOpen={showDelModal}
+        onCLose={() => setShowDelModal(false)}
+      >
+        <DeleteVocabularyModal onClose={() => setShowDelModal(false)} />
       </ModalContainer>
       <h1 className="text-3xl">Daftar Kosakata</h1>
       <div className="flex flex-col">
@@ -70,6 +79,7 @@ function VocabularyList() {
                 key={vocabulary._id}
                 editMode={editMode}
                 toggleEditModal={() => setShowEditModal(true)}
+                toggleDelModal={() => setShowDelModal(true)}
               />
             ))}
           </div>

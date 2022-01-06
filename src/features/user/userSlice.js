@@ -104,7 +104,7 @@ const userSlice = createSlice({
     [signup.rejected]: (state, { payload }) => {
       state.isFetching = false;
       state.isError = true;
-      state.errorMessage = payload.message;
+      state.errorMessage = payload;
     },
     [login.fulfilled]: (state, { payload }) => {
       state.user = payload;

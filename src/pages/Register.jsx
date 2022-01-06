@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { HiOutlineMail } from "react-icons/hi";
 import { IoMdLock } from "react-icons/io";
 import { FaUser } from "react-icons/fa";
@@ -9,17 +9,30 @@ import { userSelector } from "../features/user/userSlice";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import Spinner from "../components/Spinner";
+import { clearState } from "../features/user/userSlice";
 
 function Register() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const {
     handleSubmit,
     register,
     formState: { errors },
   } = useForm();
-  const { isFetching, isSuccess } = useSelector(userSelector);
+  const { isFetching, isSuccess, errorMessage, isError } =
+    useSelector(userSelector);
 
-  useEffect(() => {}, [isSuccess]);
+  useEffect(() => {
+    if (isError) {
+      dispatch(clearState());
+    }
+
+    if (isSuccess) {
+      dispatch(clearState());
+      navigate("/");
+    }
+  }, [isError, isSuccess, navigate, dispatch]);
+
   function onSubmit(data) {
     dispatch(signup(data));
   }
@@ -59,6 +72,7 @@ function Register() {
                 {errors.username.message}
               </p>
             )}
+
             <div className="mt-5">
               <label className="">Email</label>
               <div className="relative">
@@ -77,6 +91,9 @@ function Register() {
               <p className="text-sm text-red-500 italic mt-1">
                 {errors.email.message}
               </p>
+            )}
+            {errorMessage && (
+              <p className="text-sm text-red-500 italic mt-1">{errorMessage}</p>
             )}
 
             <div className="mt-5">
@@ -106,7 +123,7 @@ function Register() {
                 className="w-full py-3 bg-primary rounded-md text-white cursor-pointer"
                 disabled={isFetching}
               >
-                {isFetching ? <Spinner /> : "Masuk"}
+                {isFetching ? <Spinner /> : "Daftar"}
               </button>
             </div>
           </form>

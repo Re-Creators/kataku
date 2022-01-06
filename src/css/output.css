@@ -656,6 +656,18 @@ Ensure the default browser behavior of the `hidden` attribute.
   height: 1rem;
 }
 
+.h-\[174px\] {
+  height: 174px;
+}
+
+.h-\[184px\] {
+  height: 184px;
+}
+
+.h-\[300px\] {
+  height: 300px;
+}
+
 .max-h-\[600px\] {
   max-height: 600px;
 }
@@ -966,6 +978,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .pb-10 {
   padding-bottom: 2.5rem;
+}
+
+.pt-10 {
+  padding-top: 2.5rem;
 }
 
 .text-left {

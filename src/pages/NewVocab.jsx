@@ -3,10 +3,12 @@ import axios from "../axios";
 import Notification from "../components/Notification";
 import Spinner from "../components/Spinner";
 import { CSSTransition } from "react-transition-group";
+import { useSelector } from "react-redux";
+import { userSelector } from "../features/user/userSlice";
 
-const userId = "61cb0820d994c4ed4de079dc";
 function NewVocab() {
   const [english, setEnglish] = useState("");
+  const { user } = useSelector(userSelector);
   const [indonesia, setIndonesia] = useState("");
   const [loading, setLoading] = useState(false);
   const [showNotif, setShowNotif] = useState(false);
@@ -16,7 +18,7 @@ function NewVocab() {
       try {
         setLoading(true);
         await axios.post("/vocabularies", {
-          userId,
+          userId: user._id,
           english,
           indonesia,
         });

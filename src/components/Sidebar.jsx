@@ -6,7 +6,7 @@ function Sidebar({ toggleSidebar }) {
   return (
     <div className="absolute inset-0 z-20" onClick={toggleSidebar}>
       <div
-        className="w-1/4 h-full bg-white pt-5 px-8 relative"
+        className="w-4/5 md:w-1/4 h-full bg-white pt-5 px-8 relative"
         onClick={(e) => e.stopPropagation()}
       >
         <button className="top-5 right-3 absolute" onClick={toggleSidebar}>

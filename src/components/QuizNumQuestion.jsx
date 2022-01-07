@@ -25,7 +25,7 @@ function QuizNumQuestion({ startQuiz, setNumQuestion }) {
   }
   if (maxQuiz === null) return <Spinner />;
   return (
-    <div className="flex flex-col items-center w-2/5">
+    <div className="flex flex-col items-center w-full md:w-2/5">
       {maxQuiz > 5 ? (
         <>
           {" "}

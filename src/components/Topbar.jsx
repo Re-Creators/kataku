@@ -12,7 +12,7 @@ function Topbar({ toggleSidebar }) {
   const { user } = useSelector(userSelector);
 
   return (
-    <div className="w-full px-10 py-5 flex justify-between items-center">
+    <div className="w-full px-5 md:px-10 py-5 flex justify-between items-center">
       <button className="flex gap-1 items-center" onClick={toggleSidebar}>
         <BiMenu fontSize={28} className="cursor-pointer" />
         Menu

@@ -19,8 +19,10 @@ function VocabularyList() {
   const [editMode, setEditMode] = useState(false);
 
   useEffect(() => {
-    dispatch(getVocabularies());
-  }, [dispatch]);
+    if (!vocabularies) {
+      dispatch(getVocabularies());
+    }
+  }, [dispatch, vocabularies]);
 
   return (
     <div className="mt-10 w-4/5 mx-auto pb-10">

@@ -55,21 +55,21 @@ function Home() {
         </div>
       ) : (
         <>
-          <div className="mt-8 flex gap-10">
-            <div className="w-72 text-center py-10   bg-white shadow-md rounded-md">
-              <h1 className="mb-2 font-bold text-xl text-primary">
+          <div className="mt-8 flex flex-wrap gap-2 md:gap-10 justify-between md:justify-start">
+            <div className="w-[48%] md:w-72 text-center py-10 px-3 bg-white shadow-md rounded-md">
+              <h1 className="mb-2 font-bold text-base md:text-xl text-primary">
                 Kosa Kata Hari ini
               </h1>
               <h2 className="font-semibold text-lg">{data?.today.length}</h2>
             </div>
-            <div className="w-72 text-center py-10   bg-white shadow-md rounded-md">
-              <h1 className="mb-2 font-bold text-xl text-primary">
+            <div className="w-[48%] md:w-72 text-center py-10 px-3 bg-white shadow-md rounded-md">
+              <h1 className="mb-2 font-bold text-base md:text-xl text-primary">
                 Semua Kosa Kata
               </h1>
               <h2 className="font-semibold text-lg">{data?.all.total}</h2>
             </div>
-            <div className="w-72 text-center py-10   bg-white shadow-md rounded-md">
-              <h1 className="mb-2 font-bold text-xl text-primary">
+            <div className="w-full  md:w-72 text-center py-10 px-3 bg-white shadow-md rounded-md">
+              <h1 className="mb-2 font-bold text-base md:text-xl text-primary">
                 Kosa Kata Sudah Dihafal
               </h1>
               <h2 className="font-semibold text-lg">30</h2>
@@ -81,13 +81,13 @@ function Home() {
               <div className="flex gap-8 mt-3">
                 {data?.today.map((vocabulary) => (
                   <div
-                    className="w-80 text-center py-10 px-5  bg-white shadow-md rounded-md"
+                    className="w-full md:w-80 text-center py-10 px-5  bg-white shadow-md rounded-md"
                     key={vocabulary._id}
                   >
-                    <h1 className="mb-2 font-bold text-xl text-primary">
+                    <h1 className="mb-2 font-bold text-base md:text-xl text-primary">
                       {vocabulary.english}
                     </h1>
-                    <h2 className="font-semibold text-lg">
+                    <h2 className="font-semibold text-sm md:text-lg">
                       {vocabulary.indonesia}
                     </h2>
                   </div>

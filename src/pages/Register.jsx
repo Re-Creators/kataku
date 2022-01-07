@@ -38,7 +38,7 @@ function Register() {
   }
   return (
     <div className="flex justify-center items-center min-h-screen">
-      <div className="w-2/5 py-5 px-10 bg-white flex flex-col rounded-md shadow-lg">
+      <div className="w-4/5 md:w-2/5 py-5 px-10 bg-white flex flex-col rounded-md shadow-lg">
         <div className="w-32 self-center">
           <Link to="/">
             <img src="/kataku-logo.svg" alt="Logo" className="h-14" />

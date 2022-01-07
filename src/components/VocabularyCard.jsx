@@ -51,7 +51,7 @@ function VocabularyCard({
   };
 
   return (
-    <div className="w-96 h-52 bg-white p-5 rounded-md cursor-pointer hover:shadow-lg transition-shadow duration-300 relative">
+    <div className="w-full md:w-[48%] lg:w-[31%]  h-52 bg-white p-5 rounded-md cursor-pointer hover:shadow-lg transition-shadow duration-300 relative">
       {showBadge && !editMode && (
         <div className="absolute top-1 -right-3 w-20 h-14">
           <img
@@ -82,10 +82,12 @@ function VocabularyCard({
         <span className="text-xs">{vocabulary.createdAt.substr(0, 10)}</span>
       </div>
       <div className="flex items-center justify-center mt-8 flex-col">
-        <div className="text-4xl text-primary font-bold">
+        <div className="text-2xl lg:text-2xl xl:text-4xl text-primary font-bold">
           {vocabulary.english}
         </div>
-        <div className="text-2xl  font-bold mt-4">{vocabulary.indonesia}</div>
+        <div className="text-lg lg:text-xl xl:text-2xl  font-bold mt-4">
+          {vocabulary.indonesia}
+        </div>
       </div>
     </div>
   );

@@ -42,7 +42,7 @@ function Questions({ nextQuestion, question, answerCorrect }) {
     return "bg-white hover:bg-secondary hover:text-white";
   }
   return (
-    <div className="w-[30%] flex flex-col items-center">
+    <div className="w-4/5 md:w-[30%] flex flex-col items-center">
       <h1 className="text-3xl font-bold text-center">{question.question}</h1>
       <div className="w-full flex flex-wrap justify-between my-10 gap-5">
         {question.options.map((option, index) => (

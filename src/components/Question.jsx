@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "../axios";
 
 function Questions({ nextQuestion, question, answerCorrect }) {
   const [selectedAnswer, setSelectedAnswer] = useState(null);
@@ -7,6 +8,11 @@ function Questions({ nextQuestion, question, answerCorrect }) {
   function onChooseAnswer(answer) {
     if (!isAnswered) {
       if (answer === question.answer) {
+        try {
+          axios.post(`/questions/correct/${question.id}`);
+        } catch (err) {
+          console.log(err);
+        }
         answerCorrect();
       }
 

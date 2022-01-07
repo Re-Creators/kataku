@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 import ModalContainer from "../components/modals/ModalContainer";
 import EditVocabularyModal from "../components/modals/EditVocabularyModal";
 import DeleteVocabularyModal from "../components/modals/DeleteVocabularyModal";
+import Filter from "../components/Filter";
 
 const editModeClass = " transform translate-x-6";
 
@@ -59,14 +60,8 @@ function VocabularyList() {
             </div>
             <div>Edit Mode</div>
           </div>
-          <div className="">
-            <label>Filter : </label>
-            <select name="" id="">
-              <option value="">Semua</option>
-              <option value="">Terbaru</option>
-              <option value="">Selesai</option>
-            </select>
-          </div>
+          {/* Filter */}
+          <Filter />
         </div>
 
         {isFetching ? (

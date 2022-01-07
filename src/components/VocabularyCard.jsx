@@ -3,6 +3,7 @@ import { BiPencil } from "react-icons/bi";
 import { BiTrash } from "react-icons/bi";
 import { useDispatch } from "react-redux";
 import { setSelectedVocabulary } from "../features/vocabulary/vocabularySlice";
+import { useEffect, useState } from "react";
 
 function VocabularyCard({
   vocabulary,
@@ -11,7 +12,29 @@ function VocabularyCard({
   editMode,
 }) {
   const dispatch = useDispatch();
+  const [showBadge, setShowBadge] = useState(false);
+  const [badgeText, setBadgeText] = useState("");
 
+  useEffect(() => {
+    const badgeData = [
+      {
+        val: vocabulary.isCompleted,
+        text: "Hafal",
+      },
+      {
+        val: isToday(),
+        text: "Baru",
+      },
+    ];
+    setShowBadge(
+      badgeData.some((data) => {
+        if (data.val) {
+          setBadgeText(data.text);
+        }
+        return data.val;
+      })
+    );
+  }, []);
   const isToday = () =>
     new Date(vocabulary.createdAt).toDateString() === new Date().toDateString();
 
@@ -27,16 +50,16 @@ function VocabularyCard({
 
   return (
     <div className="w-96 h-52 bg-white p-5 rounded-md cursor-pointer hover:shadow-lg transition-shadow duration-300 relative">
-      {isToday() && !editMode && (
+      {showBadge && !editMode && (
         <div className="absolute top-1 -right-3 w-20 h-14">
           <img
-            src="/images/complete-banner.svg"
+            src={`/images/${badgeText}-badge.svg`}
             alt=""
             className="w-full h-full"
           />
 
           <p className="absolute w-full text-center top-1/2 -translate-y-1/2 text-white text-sm">
-            Baru
+            {badgeText}
           </p>
         </div>
       )}

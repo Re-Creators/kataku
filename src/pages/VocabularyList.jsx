@@ -29,7 +29,7 @@ function VocabularyList() {
         isModalOpen={showEditModal}
         onCLose={() => setShowEditModal(false)}
       >
-        <EditVocabularyModal />
+        <EditVocabularyModal onCLose={() => setShowEditModal(false)} />
       </ModalContainer>
       <ModalContainer
         transitionName="fade"

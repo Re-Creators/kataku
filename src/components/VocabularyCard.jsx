@@ -16,6 +16,10 @@ function VocabularyCard({
   const [badgeText, setBadgeText] = useState("");
 
   useEffect(() => {
+    const isToday = () =>
+      new Date(vocabulary.createdAt).toDateString() ===
+      new Date().toDateString();
+
     const badgeData = [
       {
         val: vocabulary.isCompleted,
@@ -34,9 +38,7 @@ function VocabularyCard({
         return data.val;
       })
     );
-  }, []);
-  const isToday = () =>
-    new Date(vocabulary.createdAt).toDateString() === new Date().toDateString();
+  }, [vocabulary]);
 
   const onDelete = () => {
     dispatch(setSelectedVocabulary(vocabulary));

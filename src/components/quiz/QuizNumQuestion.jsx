@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { getQuestions } from "../features/question/questionSlice";
-import axios from "../axios";
+import { getQuestions } from "../../features/question/questionSlice";
+import axios from "../../axios";
 import { Link } from "react-router-dom";
-import Spinner from "./Spinner";
+import Spinner from "../Spinner";
 
 function QuizNumQuestion({ startQuiz, setNumQuestion }) {
   const dispatch = useDispatch();

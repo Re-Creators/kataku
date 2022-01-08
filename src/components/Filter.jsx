@@ -15,7 +15,7 @@ function Filter() {
 
   useEffect(() => {
     if (isMounted.current) {
-      if (selected == filterItems[2]) {
+      if (selected === filterItems[2]) {
         dispatch(getVocabularies(true));
       } else {
         dispatch(getVocabularies());
@@ -23,7 +23,7 @@ function Filter() {
     } else {
       isMounted.current = true;
     }
-  }, [selected]);
+  }, [selected, dispatch]);
   return (
     <div className="flex gap-2 items-center">
       <label>Filter : </label>

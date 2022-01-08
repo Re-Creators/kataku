@@ -1,7 +1,7 @@
-import QuizNumQuestion from "../components/QuizNumQuestion";
+import QuizNumQuestion from "../components/quiz/QuizNumQuestion";
 import { useRef, useState } from "react";
-import Question from "../components/Question";
-import Result from "../components/Result";
+import Question from "../components/quiz/Question";
+import Result from "../components/quiz/Result";
 import { selectQuestions } from "../features/question/questionSlice";
 import { useSelector } from "react-redux";
 import { selectLoading } from "../features/question/questionSlice";

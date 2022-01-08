@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import PublicLayout from "./layouts/PublicLayout";
+import Profile from "./pages/Profile";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="new-vocabulary" element={<NewVocab />} />
           <Route path="vocabulary" element={<VocabularyList />} />
           <Route path="quiz" element={<Quiz />} />
+          <Route path="profile" element={<Profile />} />
         </Route>
         <Route
           path="/login"

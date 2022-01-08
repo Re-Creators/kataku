@@ -1,14 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { BiChevronDown, BiCheck } from "react-icons/bi";
+import { useDispatch } from "react-redux";
 import useClickOutside from "../hooks/useClickOutside";
+import { getVocabularies } from "../features/vocabulary/vocabularySlice";
 
 const filterItems = ["Semua", "Terbaru", "Sudah Hafal"];
 
 function Filter() {
+  const dispatch = useDispatch();
+  const isMounted = useRef(false);
   const [showOption, setShowOption] = useState(false);
   const [selected, setSelected] = useState(filterItems[0]);
   const domNode = useClickOutside(() => setShowOption(false));
 
+  useEffect(() => {
+    if (isMounted.current) {
+      if (selected == filterItems[2]) {
+        dispatch(getVocabularies(true));
+      } else {
+        dispatch(getVocabularies());
+      }
+    } else {
+      isMounted.current = true;
+    }
+  }, [selected]);
   return (
     <div className="flex gap-2 items-center">
       <label>Filter : </label>

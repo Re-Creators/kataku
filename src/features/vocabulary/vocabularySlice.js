@@ -9,9 +9,11 @@ const initialState = {
 
 export const getVocabularies = createAsyncThunk(
   "vocabulary/fetch",
-  async () => {
+  async (isSort = false) => {
     try {
-      const { data } = await axios.get("/vocabularies");
+      const { data } = await axios.get(
+        `/vocabularies${isSort ? "?sort=hafal" : ""}`
+      );
       return data;
     } catch (err) {
       console.log(err);

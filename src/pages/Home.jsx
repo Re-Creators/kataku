@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import {
   Area,
   AreaChart,
@@ -9,9 +10,10 @@ import {
   ResponsiveContainer,
   Label,
 } from "recharts";
-
 import axios from "../axios";
 import Spinner from "../components/Spinner";
+import { userSelector } from "../features/user/userSlice";
+
 const monthNames = [
   "Januari",
   "Februari",
@@ -28,6 +30,7 @@ const monthNames = [
 ];
 function Home() {
   const [data, setData] = useState(null);
+  const { user } = useSelector(userSelector);
 
   useEffect(() => {
     async function fetchData() {
@@ -44,7 +47,7 @@ function Home() {
   return (
     <div className="w-4/5 mx-auto mt-14 pb-10">
       <div className="">
-        <h1 className="text-3xl font-bold">Selamat Pagi, Richardo</h1>
+        <h1 className="text-3xl font-bold">Selamat Pagi, {user?.username}</h1>
         <p className="text-gray-500 text-sm mt-2">
           Ini adalah ringkasan hasil belajarmu.
         </p>

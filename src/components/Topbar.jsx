@@ -5,9 +5,11 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { logout } from "../features/user/userSlice";
 import { userSelector } from "../features/user/userSlice";
+import useClickOutside from "../hooks/useClickOutside";
 
 function Topbar({ toggleSidebar }) {
   const [showUserOption, setShowUserOption] = useState(false);
+  const domNode = useClickOutside(() => setShowUserOption(false));
   const dispatch = useDispatch();
   const { user } = useSelector(userSelector);
 
@@ -23,9 +25,9 @@ function Topbar({ toggleSidebar }) {
       <div className="relative">
         <div className="flex gap-2 items-center relative">
           <img
-            src="/rie.jpg"
+            src={user.avatar}
             alt="Profile"
-            className="cursor-pointer w-10 h-10 rounded-full"
+            className="cursor-pointer w-10 h-10 rounded-full object-cover object-center"
             onClick={() => setShowUserOption((oldVal) => !oldVal)}
           />
           <p
@@ -36,16 +38,23 @@ function Topbar({ toggleSidebar }) {
           </p>
         </div>
 
-        {showUserOption && (
-          <div className="absolute  bg-white w-32 top-full mt-2 left-0">
-            <button
-              className="p-2 w-full hover:bg-primary hover:text-white text-left"
-              onClick={() => dispatch(logout())}
-            >
-              Logout
-            </button>
-          </div>
-        )}
+        <div className="absolute -left-5" ref={domNode}>
+          {showUserOption && (
+            <div className=" bg-white w-32 top-full mt-2 rounded-md overflow-hidden shadow-md">
+              <Link to="/profile">
+                <button className="py-2 px-3 w-full hover:bg-primary hover:text-white text-left">
+                  Profil
+                </button>
+              </Link>
+              <button
+                className="py-2 px-3 w-full hover:bg-primary hover:text-white text-left"
+                onClick={() => dispatch(logout())}
+              >
+                Logout
+              </button>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

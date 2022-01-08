@@ -1,21 +1,25 @@
-function ProfileInfo({ onEdit }) {
+function ProfileInfo({ onEdit, user }) {
   return (
     <div className="flex flex-col gap-5">
-      <div className="grid grid-cols-[200px_auto] items-center">
+      <div className="grid grid-cols-[100px_auto] md:grid-cols-[200px_auto]items-center">
         <div>Avatar :</div>
         <div className="w-10 h-10 rounded-full overflow-hidden">
-          <img src="/rie.jpg" alt="" className="w-full h-full object-cover" />
+          <img
+            src={user.avatar}
+            alt="User Profile"
+            className="w-full h-full object-cover"
+          />
         </div>
       </div>
-      <div className="grid grid-cols-[200px_auto] items-center">
+      <div className="grid grid-cols-[100px_auto] md:grid-cols-[200px_auto] items-center">
         <div>Nama Pengguna :</div>
-        <div>Rie Takahashi</div>
+        <div>{user.username}</div>
       </div>
-      <div className="grid grid-cols-[200px_auto] items-center">
+      <div className="grid grid-cols-[100px_auto] md:grid-cols-[200px_auto] items-center">
         <div>Email :</div>
-        <div>rie@gmail.com</div>
+        <div>{user.email}</div>
       </div>
-      <div className="grid grid-cols-[200px_auto] items-center">
+      <div className="grid grid-cols-[100px_auto] md:grid-cols-[200px_auto] items-center">
         <div>Kata Sandi :</div>
         <div>*******</div>
       </div>

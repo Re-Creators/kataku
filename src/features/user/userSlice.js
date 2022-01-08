@@ -91,6 +91,9 @@ const userSlice = createSlice({
       localStorage.clear("kataku_token");
       window.location.href = "http://localhost:3000/login";
     },
+    updateUser: (state, { payload }) => {
+      state.user = payload;
+    },
   },
   extraReducers: {
     [signup.fulfilled]: (state, { payload }) => {
@@ -135,7 +138,7 @@ const userSlice = createSlice({
   },
 });
 
-export const { clearState, logout } = userSlice.actions;
+export const { clearState, logout, updateUser } = userSlice.actions;
 
 export const userSelector = (state) => state.user;
 export default userSlice.reducer;

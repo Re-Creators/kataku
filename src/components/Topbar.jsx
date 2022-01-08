@@ -38,7 +38,7 @@ function Topbar({ toggleSidebar }) {
           </p>
         </div>
 
-        <div className="absolute -left-5" ref={domNode}>
+        <div className="absolute -left-5 md:-left-10" ref={domNode}>
           {showUserOption && (
             <div className=" bg-white w-32 top-full mt-2 rounded-md overflow-hidden shadow-md">
               <Link to="/profile">

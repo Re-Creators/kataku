@@ -2,6 +2,11 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import axiosClient from "../../axios";
 
+const backend_url =
+  process.env.NODE_ENV === "development"
+    ? "http://localhost:8080/api"
+    : "https://kataku-backend.herokuapp.com/";
+
 const initialState = {
   user: null,
   isFetching: false,
@@ -15,7 +20,7 @@ export const signup = createAsyncThunk(
   async ({ username, email, password }, thunkAPI) => {
     try {
       const { data, status } = await axios.post(
-        "http://localhost:8080/api/auth/register",
+        `${backend_url}/auth/register`,
         { username, email, password }
       );
 
@@ -47,7 +52,10 @@ export const fetchUser = createAsyncThunk(
     } catch (e) {
       if (e.response.status === 400) {
         localStorage.clear("kataku_token");
-        window.location.href = "http://localhost:3000/login";
+        window.location.href =
+          process.env.NODE_ENV === "development"
+            ? "http://localhost:8080/login"
+            : "https://kataku-backend.herokuapp.com/login";
       }
       return thunkAPI.rejectWithValue(e.response.data);
     }

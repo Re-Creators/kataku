@@ -23,12 +23,16 @@ function QuizNumQuestion({ startQuiz, setNumQuestion }) {
     dispatch(getQuestions(numQuiz));
     startQuiz();
   }
-  if (maxQuiz === null) return <Spinner />;
+  if (maxQuiz === null)
+    return (
+      <div className="w-full mt-10 flex items-center justify-center">
+        <Spinner classSize="w-10 h-10" />
+      </div>
+    );
   return (
     <div className="flex flex-col items-center w-full md:w-2/5">
       {maxQuiz > 5 ? (
         <>
-          {" "}
           <div className="text-center">
             <h1 className="text-3xl font-bold">Jumlah Soal ?</h1>
             <span className="text-sm">(max : {maxQuiz})</span>

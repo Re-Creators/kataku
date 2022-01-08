@@ -20,10 +20,8 @@ function VocabularyList() {
   const [editMode, setEditMode] = useState(false);
 
   useEffect(() => {
-    if (!vocabularies) {
-      dispatch(getVocabularies());
-    }
-  }, [dispatch, vocabularies]);
+    dispatch(getVocabularies());
+  }, [dispatch]);
 
   return (
     <div className="mt-10 w-4/5 mx-auto pb-10">
@@ -43,10 +41,10 @@ function VocabularyList() {
       </ModalContainer>
       <h1 className="text-3xl">Daftar Kosakata</h1>
       <div className="flex flex-col">
-        <div className="flex justify-between mt-5 ">
-          <div className="flex gap-2 items-center">
+        <div className="flex flex-col-reverse md:flex-row justify-between mt-5 ">
+          <div className="flex gap-2 items-center mt-5 md:mt-0">
             <div
-              className="w-10 h-4 flex items-center bg-white rounded-full cursor-pointer"
+              className="w-10 h-4 flex items-center bg-white rounded-full cursor-pointer  "
               onClick={() => {
                 setEditMode(!editMode);
               }}

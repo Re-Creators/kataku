@@ -78,7 +78,7 @@ function Home() {
           {data?.today.length > 0 && (
             <div className="mt-10">
               <h1 className="font-bold text-lg">Kosa Kata Baru</h1>
-              <div className="flex gap-8 mt-3">
+              <div className="flex gap-3 md:gap-8 mt-3 flex-wrap">
                 {data?.today.map((vocabulary) => (
                   <div
                     className="w-full md:w-80 text-center py-10 px-5  bg-white shadow-md rounded-md"

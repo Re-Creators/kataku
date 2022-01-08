@@ -55,7 +55,7 @@ export const fetchUser = createAsyncThunk(
         window.location.href =
           process.env.NODE_ENV === "development"
             ? "http://localhost:8080/login"
-            : "https://kataku-backend.herokuapp.com/login";
+            : "https://kataku-io.netlify.app/login";
       }
       return thunkAPI.rejectWithValue(e.response.data);
     }

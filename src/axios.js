@@ -3,7 +3,7 @@ import axios from "axios";
 const endpoint =
   process.env.NODE_ENV === "development"
     ? "http://localhost:8080/api"
-    : "https://kataku-backend.herokuapp.com/";
+    : "https://kataku-backend.herokuapp.com/api";
 
 const instance = axios.create({
   baseURL: endpoint,

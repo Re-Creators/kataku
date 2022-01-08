@@ -5,7 +5,7 @@ import axiosClient from "../../axios";
 const backend_url =
   process.env.NODE_ENV === "development"
     ? "http://localhost:8080/api"
-    : "https://kataku-backend.herokuapp.com/";
+    : "https://kataku-backend.herokuapp.com/api";
 
 const initialState = {
   user: null,
@@ -54,7 +54,7 @@ export const fetchUser = createAsyncThunk(
         localStorage.clear("kataku_token");
         window.location.href =
           process.env.NODE_ENV === "development"
-            ? "http://localhost:8080/login"
+            ? "http://:localhost:8080/login"
             : "https://kataku-io.netlify.app/login";
       }
       return thunkAPI.rejectWithValue(e.response.data);
@@ -66,10 +66,10 @@ export const login = createAsyncThunk(
   "user/login",
   async ({ email, password }, thunkAPI) => {
     try {
-      const { data, status } = await axios.post(
-        "http://localhost:8080/api/auth/login",
-        { email, password }
-      );
+      const { data, status } = await axios.post(`${backend_url}/auth/login`, {
+        email,
+        password,
+      });
 
       if (status === 200) {
         localStorage.setItem("kataku_token", data.token);
@@ -97,7 +97,10 @@ const userSlice = createSlice({
     },
     logout: (state) => {
       localStorage.clear("kataku_token");
-      window.location.href = "http://localhost:3000/login";
+      window.location.href =
+        process.env.NODE_ENV === "development"
+          ? "http://:localhost:8080/login"
+          : "https://kataku-io.netlify.app/login";
     },
     updateUser: (state, { payload }) => {
       state.user = payload;

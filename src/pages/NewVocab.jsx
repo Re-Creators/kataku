@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import { useState } from "react";
 import axios from "../axios";
 import Notification from "../components/Notification";
 import Spinner from "../components/Spinner";
@@ -13,7 +13,7 @@ function NewVocab() {
   const [loading, setLoading] = useState(false);
   const [showNotif, setShowNotif] = useState(false);
 
-  const addVocabulary = useCallback(async () => {
+  const addVocabulary = async () => {
     if (indonesia !== "" && english !== "") {
       try {
         setLoading(true);
@@ -30,7 +30,7 @@ function NewVocab() {
         console.log(err);
       }
     }
-  }, [indonesia, english]);
+  };
 
   function triggerNotification() {
     setShowNotif(true);

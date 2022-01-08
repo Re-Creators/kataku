@@ -8,6 +8,7 @@ import ModalContainer from "../components/modals/ModalContainer";
 import { useDispatch } from "react-redux";
 import { fetchUser } from "../features/user/userSlice";
 import { logout } from "../features/user/userSlice";
+import Spinner from "../components/Spinner";
 
 function MainLayout() {
   const [loading, setLoading] = useState(true);
@@ -22,7 +23,7 @@ function MainLayout() {
     } else {
       dispatch(logout());
     }
-  }, []);
+  }, [dispatch]);
 
   useEffect(() => {
     if (isSuccess) {
@@ -30,7 +31,12 @@ function MainLayout() {
     }
   }, [isSuccess]);
 
-  if (loading) return <p>Loading</p>;
+  if (loading)
+    return (
+      <div className="w-full h-screen flex items-center justify-center">
+        <Spinner classSize="w-10 h-10" />
+      </div>
+    );
   if (!user) return <Navigate to="/login" state={{ from: location }} replace />;
 
   return (

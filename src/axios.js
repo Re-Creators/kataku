@@ -7,6 +7,7 @@ const endpoint =
 
 const instance = axios.create({
   baseURL: endpoint,
+  withCredentials: true,
 });
 
 instance.interceptors.request.use(function (req) {

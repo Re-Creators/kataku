@@ -49,7 +49,7 @@ function Questions({ nextQuestion, question, answerCorrect }) {
           <div
             className={`${optionClass(
               option
-            )} px-3 py-5 rounded-lg cursor-pointer w-full text-center transition-all duration-300`}
+            )} px-3 py-5 rounded-lg cursor-pointer w-full text-center transition-all duration-300 capitalize`}
             key={index}
             onClick={() => onChooseAnswer(option)}
           >

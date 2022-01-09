@@ -47,7 +47,9 @@ function Home() {
   return (
     <div className="w-4/5 mx-auto mt-14 pb-10">
       <div className="">
-        <h1 className="text-3xl font-bold">Selamat Pagi, {user?.username}</h1>
+        <h1 className="text-3xl font-bold capitalize">
+          Selamat Pagi, {user?.username}
+        </h1>
         <p className="text-gray-500 text-sm mt-2">
           Ini adalah ringkasan hasil belajarmu.
         </p>
@@ -87,10 +89,10 @@ function Home() {
                     className="w-full md:w-80 text-center py-10 px-5  bg-white shadow-md rounded-md"
                     key={vocabulary._id}
                   >
-                    <h1 className="mb-2 font-bold text-base md:text-xl text-primary">
+                    <h1 className="mb-2 font-bold text-base md:text-xl text-primary capitalize">
                       {vocabulary.english}
                     </h1>
-                    <h2 className="font-semibold text-sm md:text-lg">
+                    <h2 className="font-semibold text-sm md:text-lg capitalize">
                       {vocabulary.indonesia}
                     </h2>
                   </div>

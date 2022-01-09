@@ -58,7 +58,7 @@ function Home() {
         </div>
       ) : (
         <>
-          <div className="mt-8 flex flex-wrap gap-2 md:gap-10 justify-between md:justify-start">
+          <div className="mt-8 flex flex-wrap gap-x-2 md:gap-10 justify-between md:justify-start">
             <div className="w-[48%] md:w-72 text-center py-10 px-3 bg-white shadow-md rounded-md">
               <h1 className="mb-2 font-bold text-base md:text-xl text-primary">
                 Kosa Kata Hari ini
@@ -71,11 +71,11 @@ function Home() {
               </h1>
               <h2 className="font-semibold text-lg">{data?.all.total}</h2>
             </div>
-            <div className="w-full  md:w-72 text-center py-10 px-3 bg-white shadow-md rounded-md">
+            <div className="w-full mt-2 md:mt-0  md:w-72 text-center py-10 px-3 bg-white shadow-md rounded-md">
               <h1 className="mb-2 font-bold text-base md:text-xl text-primary">
                 Kosa Kata Sudah Dihafal
               </h1>
-              <h2 className="font-semibold text-lg">30</h2>
+              <h2 className="font-semibold text-lg">{data?.hafal.total}</h2>
             </div>
           </div>
           {data?.today.length > 0 && (

@@ -51,7 +51,7 @@ function VocabularyCard({
   };
 
   return (
-    <div className="w-full md:w-[48%] lg:w-[31%]  h-52 bg-white p-5 rounded-md cursor-pointer hover:shadow-lg transition-shadow duration-300 relative">
+    <div className="mb-5 md:mb-0 w-full md:w-[48%] lg:w-[31%]  h-52 bg-white p-5 rounded-md cursor-pointer hover:shadow-lg transition-shadow duration-300 relative">
       {showBadge && !editMode && (
         <div className="absolute top-1 -right-3 w-20 h-14">
           <img

@@ -67,7 +67,7 @@ function VocabularyList() {
             <Spinner classSize="w-10 h-10" />
           </div>
         ) : (
-          <div className="mt-5 flex flex-wrap gap-5">
+          <div className="mt-5 flex flex-wrap md:gap-5">
             {vocabularies?.map((vocabulary) => (
               <VocabularyCard
                 vocabulary={vocabulary}

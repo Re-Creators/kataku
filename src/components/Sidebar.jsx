@@ -16,8 +16,8 @@ function Sidebar({ toggleSidebar }) {
           <img src="/kataku-logo.svg" alt="" className="h-10 mx-auto" />
         </Link>
         <div className="mt-10">
-          <ul className="text-xl flex flex-col gap-8">
-            <li className="">
+          <ul className="text-xl flex flex-col">
+            <li className="mb-5">
               <Link
                 to="/"
                 className="w-full relative hover:text-primary sliding-underline"
@@ -26,7 +26,7 @@ function Sidebar({ toggleSidebar }) {
                 Home
               </Link>
             </li>
-            <li>
+            <li className="mb-5">
               <Link
                 to="/new-vocabulary"
                 className="w-full relative hover:text-primary sliding-underline"
@@ -35,7 +35,7 @@ function Sidebar({ toggleSidebar }) {
                 Tambah Kosakata
               </Link>
             </li>
-            <li>
+            <li className="mb-5">
               <Link
                 to="/vocabulary"
                 className="w-full relative hover:text-primary sliding-underline"

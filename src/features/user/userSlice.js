@@ -96,11 +96,8 @@ const userSlice = createSlice({
       return state;
     },
     logout: (state) => {
-      localStorage.clear("kataku_token");
-      window.location.href =
-        process.env.NODE_ENV === "development"
-          ? "http://:localhost:8080/login"
-          : "https://kataku-io.netlify.app/login";
+      localStorage.clear();
+      window.location.href = document.location.origin + "/login";
     },
     updateUser: (state, { payload }) => {
       state.user = payload;

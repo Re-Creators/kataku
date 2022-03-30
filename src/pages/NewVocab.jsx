@@ -5,6 +5,7 @@ import Spinner from "../components/Spinner";
 import { CSSTransition } from "react-transition-group";
 import { useSelector } from "react-redux";
 import { userSelector } from "../features/user/userSlice";
+import { postData } from "../api";
 
 function NewVocab() {
   const [english, setEnglish] = useState("");
@@ -14,22 +15,18 @@ function NewVocab() {
   const [showNotif, setShowNotif] = useState(false);
 
   const addVocabulary = async () => {
-    if (indonesia !== "" && english !== "") {
-      try {
-        setLoading(true);
-        await axios.post("/vocabularies", {
-          userId: user._id,
-          english,
-          indonesia,
-        });
-        setLoading(false);
-        triggerNotification();
-        setIndonesia("");
-        setEnglish("");
-      } catch (err) {
-        console.log(err);
-      }
-    }
+    setLoading(true);
+
+    await postData("/vocabularies", {
+      userId: user._id,
+      english,
+      indonesia,
+    });
+
+    setLoading(false);
+    triggerNotification();
+    setIndonesia("");
+    setEnglish("");
   };
 
   function triggerNotification() {
@@ -70,8 +67,10 @@ function NewVocab() {
         </div>
         <button
           className="bg-primary py-3 px-10 text-white rounded-md hover:shadow-lg transition-all duration-100 disabled:opacity-75 "
-          onClick={() => addVocabulary()}
-          disabled={loading}
+          onClick={addVocabulary}
+          disabled={
+            loading || !english.trim().length || !indonesia.trim().length
+          }
         >
           {loading ? <Spinner /> : "Tambah"}
         </button>

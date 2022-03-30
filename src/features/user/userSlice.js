@@ -2,10 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import axiosClient from "../../axios";
 
-const backend_url =
-  process.env.NODE_ENV === "development"
-    ? "http://localhost:8080/api"
-    : "https://kataku-backend.herokuapp.com/api";
+const backend_url = "https://kataku-backend.herokuapp.com/api";
 
 const initialState = {
   user: null,
@@ -51,11 +48,8 @@ export const fetchUser = createAsyncThunk(
       }
     } catch (e) {
       if (e.response.status === 400) {
-        localStorage.clear("kataku_token");
-        window.location.href =
-          process.env.NODE_ENV === "development"
-            ? "http://:localhost:8080/login"
-            : "https://kataku-io.netlify.app/login";
+        localStorage.clear();
+        window.location.href = window.location.origin + "/login";
       }
       return thunkAPI.rejectWithValue(e.response.data);
     }

@@ -13,6 +13,7 @@ import {
 import axios from "../axios";
 import Spinner from "../components/Spinner";
 import { userSelector } from "../features/user/userSlice";
+import { greetTime } from "../helpers";
 
 const monthNames = [
   "Januari",
@@ -48,10 +49,10 @@ function Home() {
     <div className="w-4/5 mx-auto mt-14 pb-10">
       <div className="">
         <h1 className="text-3xl font-bold capitalize">
-          Selamat Pagi, {user?.username}
+          Selamat {greetTime()}, {user?.username}
         </h1>
         <p className="text-gray-500 text-sm mt-2">
-          Ini adalah ringkasan hasil belajarmu.
+          Ini adalah ringkasan kosa kata kamu.
         </p>
       </div>
       {!data ? (

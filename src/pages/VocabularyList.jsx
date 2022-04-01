@@ -77,6 +77,12 @@ function VocabularyList() {
                 toggleDelModal={() => setShowDelModal(true)}
               />
             ))}
+
+            {vocabularies?.length === 0 && (
+              <p className="text-center text-xl mt-10 mx-auto">
+                Tidak ada kosa kata
+              </p>
+            )}
           </div>
         )}
       </div>

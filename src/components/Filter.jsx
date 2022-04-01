@@ -4,18 +4,22 @@ import { useDispatch } from "react-redux";
 import useClickOutside from "../hooks/useClickOutside";
 import { getVocabularies } from "../features/vocabulary/vocabularySlice";
 
-const filterItems = ["Semua", "Terbaru", "Sudah Hafal"];
+const filterItems = {
+  ALL: "Semua",
+  NEW: "Terbaru",
+  DONE: "Sudah Hafal",
+};
 
 function Filter() {
   const dispatch = useDispatch();
   const isMounted = useRef(false);
   const [showOption, setShowOption] = useState(false);
-  const [selected, setSelected] = useState(filterItems[0]);
+  const [selected, setSelected] = useState(filterItems.ALL);
   const domNode = useClickOutside(() => setShowOption(false));
 
   useEffect(() => {
     if (isMounted.current) {
-      if (selected === filterItems[2]) {
+      if (selected === filterItems.DONE) {
         dispatch(getVocabularies(true));
       } else {
         dispatch(getVocabularies());
@@ -27,17 +31,17 @@ function Filter() {
   return (
     <div className="flex gap-2 items-center">
       <label>Filter : </label>
-      <div className="w-36  relative cursor-pointer">
+      <div
+        className="w-36  relative cursor-pointer"
+        onClick={() => setShowOption(!showOption)}
+      >
         <input
           type="text"
           disabled
           className="bg-white p-2 px-3 w-full cursor-pointer"
-          value="Terbaru"
+          value={selected}
         />
-        <span
-          className="absolute top-1/2 -translate-y-1/2 right-3"
-          onClick={() => setShowOption(!showOption)}
-        >
+        <span className="absolute top-1/2 -translate-y-1/2 right-3">
           <BiChevronDown fontSize={24} />
         </span>
         <div
@@ -46,7 +50,7 @@ function Filter() {
         >
           {showOption && (
             <ul className="">
-              {filterItems.map((item, index) => (
+              {Object.values(filterItems).map((item, index) => (
                 <li
                   className="cursor-pinter p-3 hover:bg-primary hover:text-white flex justify-between items-center transition-colors duration-300"
                   key={index}

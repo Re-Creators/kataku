@@ -1,7 +1,14 @@
 import React from "react";
+import ListCard from "./ListCard";
 
-function ListView() {
-  return <div>ListView</div>;
+function ListView({ vocabularies }) {
+  return (
+    <div className="mt-5 flex flex-col">
+      {vocabularies?.map((vocabulary) => (
+        <ListCard vocabulary={vocabulary} key={vocabulary._id} />
+      ))}
+    </div>
+  );
 }
 
 export default ListView;

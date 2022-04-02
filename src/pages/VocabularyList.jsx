@@ -12,6 +12,7 @@ import GridView from "../components/vocabulary-list/GridView";
 import VocabularyContext from "../context/VocabularyContext";
 import { MdGridView } from "react-icons/md";
 import { MdOutlineFormatListBulleted } from "react-icons/md";
+import ListView from "../components/vocabulary-list/ListView";
 
 const editModeClass = " transform translate-x-6";
 const VIEW = {
@@ -102,7 +103,11 @@ function VocabularyList() {
               toggleDelModal: () => setShowDelModal(true),
             }}
           >
-            <GridView vocabularies={vocabularies} />
+            {view === VIEW.GRID ? (
+              <GridView vocabularies={vocabularies} />
+            ) : (
+              <ListView vocabularies={vocabularies} />
+            )}
           </VocabularyContext.Provider>
         )}
       </div>

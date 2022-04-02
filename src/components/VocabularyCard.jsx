@@ -1,52 +1,13 @@
 import { BsCalendar3 } from "react-icons/bs";
-import { BiPencil } from "react-icons/bi";
-import { BiTrash } from "react-icons/bi";
-import { useDispatch } from "react-redux";
-import { setSelectedVocabulary } from "../features/vocabulary/vocabularySlice";
-import { useContext, useEffect, useState } from "react";
+
+import { useContext } from "react";
 import VocabularyContext from "../context/VocabularyContext";
+import useBadge from "../hooks/useBadge";
+import EditOption from "./shared/EditOption";
 
 function VocabularyCard({ vocabulary }) {
-  const dispatch = useDispatch();
-  const [showBadge, setShowBadge] = useState(false);
-  const [badgeText, setBadgeText] = useState("");
-  const { toggleEditModal, toggleDelModal, editMode } =
-    useContext(VocabularyContext);
-
-  useEffect(() => {
-    const isToday = () =>
-      new Date(vocabulary.createdAt).toDateString() ===
-      new Date().toDateString();
-
-    const badgeData = [
-      {
-        val: vocabulary.isCompleted,
-        text: "Hafal",
-      },
-      {
-        val: isToday(),
-        text: "Baru",
-      },
-    ];
-    setShowBadge(
-      badgeData.some((data) => {
-        if (data.val) {
-          setBadgeText(data.text);
-        }
-        return data.val;
-      })
-    );
-  }, [vocabulary]);
-
-  const onDelete = () => {
-    dispatch(setSelectedVocabulary(vocabulary));
-    toggleDelModal(vocabulary);
-  };
-
-  const onEdit = () => {
-    dispatch(setSelectedVocabulary(vocabulary));
-    toggleEditModal();
-  };
+  const { showBadge, badgeText } = useBadge(vocabulary);
+  const { editMode } = useContext(VocabularyContext);
 
   return (
     <div className="mb-5 md:mb-0 h-52 bg-white p-5 rounded-md cursor-pointer hover:shadow-lg transition-shadow duration-300 relative">
@@ -64,16 +25,7 @@ function VocabularyCard({ vocabulary }) {
         </div>
       )}
 
-      {editMode && (
-        <div className="absolute top-4 right-5 flex gap-3 text-gray-500">
-          <button title="Edit">
-            <BiPencil onClick={() => onEdit()} />
-          </button>
-          <button title="Hapus" onClick={() => onDelete()}>
-            <BiTrash />
-          </button>
-        </div>
-      )}
+      {editMode && <EditOption vocabulary={vocabulary} />}
 
       <div className="flex items-center text-gray-400 gap-2">
         <BsCalendar3 fontSize={14} />

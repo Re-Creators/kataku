@@ -8,8 +8,19 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import PublicLayout from "./layouts/PublicLayout";
 import Profile from "./pages/Profile";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { fetchUser } from "./features/user/userSlice";
 
 function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (localStorage.getItem("kataku_token")) {
+      dispatch(fetchUser());
+    }
+  }, [dispatch]);
+
   return (
     <div className="App">
       <Routes>

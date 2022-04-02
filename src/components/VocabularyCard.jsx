@@ -3,17 +3,15 @@ import { BiPencil } from "react-icons/bi";
 import { BiTrash } from "react-icons/bi";
 import { useDispatch } from "react-redux";
 import { setSelectedVocabulary } from "../features/vocabulary/vocabularySlice";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import VocabularyContext from "../context/VocabularyContext";
 
-function VocabularyCard({
-  vocabulary,
-  toggleEditModal,
-  toggleDelModal,
-  editMode,
-}) {
+function VocabularyCard({ vocabulary }) {
   const dispatch = useDispatch();
   const [showBadge, setShowBadge] = useState(false);
   const [badgeText, setBadgeText] = useState("");
+  const { toggleEditModal, toggleDelModal, editMode } =
+    useContext(VocabularyContext);
 
   useEffect(() => {
     const isToday = () =>

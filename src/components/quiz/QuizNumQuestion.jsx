@@ -18,17 +18,20 @@ function QuizNumQuestion({ startQuiz, setNumQuestion }) {
     }
     fetchData();
   }, []);
+
   function onQuizStart() {
     setNumQuestion(numQuiz);
     dispatch(getQuestions(numQuiz));
     startQuiz();
   }
+
   if (maxQuiz === null)
     return (
       <div className="w-full mt-10 flex items-center justify-center">
         <Spinner classSize="w-10 h-10" />
       </div>
     );
+
   return (
     <div className="flex flex-col items-center w-full md:w-2/5">
       {maxQuiz > 5 ? (
@@ -62,7 +65,7 @@ function QuizNumQuestion({ startQuiz, setNumQuestion }) {
           </p>
 
           <Link
-            to="/"
+            to="/new-vocabulary"
             className="mt-10 px-5 py-2 bg-primary rounded-md text-white"
           >
             Tambah Kosakata

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import VocabularyCard from "../components/VocabularyCard";
 import Spinner from "../components/Spinner";
 import { useDispatch } from "react-redux";
 import { getVocabularies } from "../features/vocabulary/vocabularySlice";
@@ -9,6 +8,8 @@ import ModalContainer from "../components/modals/ModalContainer";
 import EditVocabularyModal from "../components/modals/EditVocabularyModal";
 import DeleteVocabularyModal from "../components/modals/DeleteVocabularyModal";
 import Filter from "../components/Filter";
+import GridView from "../components/vocabulary-list/GridView";
+import VocabularyContext from "../context/VocabularyContext";
 
 const editModeClass = " transform translate-x-6";
 
@@ -58,8 +59,9 @@ function VocabularyList() {
             </div>
             <div>Edit Mode</div>
           </div>
-          {/* Filter */}
-          <Filter />
+          <div>
+            <Filter />
+          </div>
         </div>
 
         {isFetching ? (
@@ -67,23 +69,16 @@ function VocabularyList() {
             <Spinner classSize="w-10 h-10" />
           </div>
         ) : (
-          <div className="mt-5 flex flex-wrap md:gap-5">
-            {vocabularies?.map((vocabulary) => (
-              <VocabularyCard
-                vocabulary={vocabulary}
-                key={vocabulary._id}
-                editMode={editMode}
-                toggleEditModal={() => setShowEditModal(true)}
-                toggleDelModal={() => setShowDelModal(true)}
-              />
-            ))}
-
-            {vocabularies?.length === 0 && (
-              <p className="text-center text-xl mt-10 mx-auto">
-                Tidak ada kosa kata
-              </p>
-            )}
-          </div>
+          <VocabularyContext.Provider
+            value={{
+              vocabularies,
+              editMode,
+              toggleEditModal: () => setShowEditModal(true),
+              toggleDelModal: () => setShowDelModal(true),
+            }}
+          >
+            <GridView vocabularies={vocabularies} />
+          </VocabularyContext.Provider>
         )}
       </div>
     </div>

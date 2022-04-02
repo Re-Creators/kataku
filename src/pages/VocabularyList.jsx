@@ -10,8 +10,14 @@ import DeleteVocabularyModal from "../components/modals/DeleteVocabularyModal";
 import Filter from "../components/Filter";
 import GridView from "../components/vocabulary-list/GridView";
 import VocabularyContext from "../context/VocabularyContext";
+import { MdGridView } from "react-icons/md";
+import { MdOutlineFormatListBulleted } from "react-icons/md";
 
 const editModeClass = " transform translate-x-6";
+const VIEW = {
+  GRID: "grid",
+  LIST: "list",
+};
 
 function VocabularyList() {
   const dispatch = useDispatch();
@@ -19,6 +25,7 @@ function VocabularyList() {
   const [showEditModal, setShowEditModal] = useState(false);
   const [showDelModal, setShowDelModal] = useState(false);
   const [editMode, setEditMode] = useState(false);
+  const [view, setView] = useState(VIEW.GRID);
 
   useEffect(() => {
     dispatch(getVocabularies());
@@ -59,8 +66,26 @@ function VocabularyList() {
             </div>
             <div>Edit Mode</div>
           </div>
-          <div>
+          <div className="flex">
             <Filter />
+            <div className="flex">
+              <button
+                className={`p-3 rounded-md ${
+                  view === VIEW.LIST ? "bg-primary text-white" : ""
+                }`}
+                onClick={() => setView(VIEW.LIST)}
+              >
+                <MdOutlineFormatListBulleted />
+              </button>
+              <button
+                className={`p-3 rounded-md ${
+                  view === VIEW.GRID ? "bg-primary text-white" : ""
+                }`}
+                onClick={() => setView(VIEW.GRID)}
+              >
+                <MdGridView />
+              </button>
+            </div>
           </div>
         </div>
 

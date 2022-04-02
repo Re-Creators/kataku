@@ -29,7 +29,7 @@ function Filter() {
     }
   }, [selected, dispatch]);
   return (
-    <div className="flex gap-2 items-center">
+    <div className="flex gap-2 items-center mr-5">
       <label>Filter : </label>
       <div
         className="w-36  relative cursor-pointer"

@@ -3,7 +3,7 @@ import VocabularyCard from "../VocabularyCard";
 
 export default function GridView({ vocabularies }) {
   return (
-    <div className="mt-5 flex flex-wrap md:gap-5">
+    <div className="mt-5 grid md:grid-cols-2 lg:grid-cols-3 md:gap-5">
       {vocabularies?.map((vocabulary) => (
         <VocabularyCard vocabulary={vocabulary} key={vocabulary._id} />
       ))}

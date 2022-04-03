@@ -15,7 +15,7 @@ function MainLayout() {
   if (!localStorage.getItem("kataku_token"))
     return <Navigate to="/login" state={{ from: location }} replace />;
 
-  if (isFetching && !user)
+  if (isFetching || !user)
     return (
       <div className="w-full h-screen flex items-center justify-center">
         <Spinner classSize="w-10 h-10" />

@@ -6,6 +6,7 @@ import {
   vocabularySelector,
 } from "../../features/vocabulary/vocabularySlice";
 import axios from "../../axios";
+import Spinner from "../Spinner";
 
 function EditVocabularyModal({ onCLose }) {
   const dispatch = useDispatch();
@@ -16,8 +17,11 @@ function EditVocabularyModal({ onCLose }) {
     selectedVocabulary.isCompleted
   );
 
+  const [loading, setLoading] = useState(false);
+
   const onUpdate = async () => {
     try {
+      setLoading(true);
       await axios.put(`/vocabularies/${selectedVocabulary._id}`, {
         english,
         indonesia,
@@ -25,6 +29,8 @@ function EditVocabularyModal({ onCLose }) {
         ...(selectedVocabulary.isCompleted &&
           !isCompleted && { correctCount: 0 }),
       });
+
+      setLoading(false);
       dispatch(getVocabularies());
       onCLose();
     } catch (err) {
@@ -67,8 +73,9 @@ function EditVocabularyModal({ onCLose }) {
       <button
         className="py-3 px-10 bg-primary rounded-md text-white mx-auto w-full"
         onClick={() => onUpdate()}
+        disabled={loading}
       >
-        Simpan
+        {loading ? <Spinner /> : "Simpan"}
       </button>
     </div>
   );

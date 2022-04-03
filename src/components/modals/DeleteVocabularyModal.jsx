@@ -6,16 +6,22 @@ import {
   vocabularySelector,
 } from "../../features/vocabulary/vocabularySlice";
 import axios from "../../axios";
+import { useState } from "react";
+import Spinner from "../Spinner";
 
 function DeleteVocabularyModal({ onClose }) {
   const dispatch = useDispatch();
   const { selectedVocabulary } = useSelector(vocabularySelector);
+  const [loading, setLoading] = useState(false);
 
   const onDelete = async () => {
     try {
+      setLoading(true);
       await axios.delete(`/vocabularies/${selectedVocabulary._id}`);
-      dispatch(getVocabularies());
+
       onClose();
+      setLoading(false);
+      dispatch(getVocabularies());
     } catch (err) {
       console.log(err);
     }
@@ -41,10 +47,11 @@ function DeleteVocabularyModal({ onClose }) {
           Batal
         </button>
         <button
-          className="px-10 py-2 bg-red-500 rounded-md text-white"
+          className="py-2 bg-red-500 rounded-md text-white w-[100px]"
           onClick={() => onDelete()}
+          disabled={loading}
         >
-          Hapus
+          {loading ? <Spinner /> : "Hapus"}
         </button>
       </div>
     </div>

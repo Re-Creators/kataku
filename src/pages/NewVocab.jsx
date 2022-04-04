@@ -1,5 +1,4 @@
 import { useState } from "react";
-import axios from "../axios";
 import Notification from "../components/Notification";
 import Spinner from "../components/Spinner";
 import { CSSTransition } from "react-transition-group";

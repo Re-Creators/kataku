@@ -23,11 +23,19 @@ const VIEW = {
 
 function VocabularyList() {
   const dispatch = useDispatch();
-  const { data: vocabularies, isFetching } = useSelector(vocabularySelector);
+  const {
+    data: vocabularies,
+    isFetching,
+    pageInfo,
+  } = useSelector(vocabularySelector);
   const [showEditModal, setShowEditModal] = useState(false);
   const [showDelModal, setShowDelModal] = useState(false);
   const [editMode, setEditMode] = useState(false);
   const [view, setView] = useState(VIEW.GRID);
+
+  const handlePageClick = (event) => {
+    dispatch(getVocabularies({ page: event.selected + 1 }));
+  };
 
   useEffect(() => {
     dispatch(getVocabularies());
@@ -112,22 +120,26 @@ function VocabularyList() {
           </VocabularyContext.Provider>
         )}
       </div>
-      <ReactPaginate
-        breakLabel="..."
-        nextLabel="&raquo;"
-        pageRangeDisplayed={5}
-        pageCount={10}
-        previousLabel="&laquo;"
-        containerClassName="pagination"
-        pageClassName="pagination__page"
-        activeClassName="pagination__page--active"
-        previousClassName="pagination__page--prev"
-        nextClassName="pagination__page--next"
-        breakClassName="pagination__page--break"
-        disabledClassName="pagination__page--disabled"
-        disabledLinkClassName="pagination__page--disabled-link"
-        renderOnZeroPageCount={null}
-      />
+      {pageInfo?.totalPage > 1 && (
+        <ReactPaginate
+          breakLabel="..."
+          nextLabel="&raquo;"
+          pageRangeDisplayed={5}
+          forcePage={pageInfo.currentPage - 1}
+          pageCount={pageInfo?.totalPage}
+          onPageChange={handlePageClick}
+          previousLabel="&laquo;"
+          containerClassName="pagination"
+          pageClassName="pagination__page"
+          activeClassName="pagination__page--active"
+          previousClassName="pagination__page--prev"
+          nextClassName="pagination__page--next"
+          breakClassName="pagination__page--break"
+          disabledClassName="pagination__page--disabled"
+          disabledLinkClassName="pagination__page--disabled-link"
+          renderOnZeroPageCount={null}
+        />
+      )}
     </div>
   );
 }

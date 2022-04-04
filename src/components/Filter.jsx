@@ -20,7 +20,7 @@ function Filter() {
   useEffect(() => {
     if (isMounted.current) {
       if (selected === filterItems.DONE) {
-        dispatch(getVocabularies(true));
+        dispatch(getVocabularies({ sortType: "hafal" }));
       } else {
         dispatch(getVocabularies());
       }

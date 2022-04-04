@@ -10,9 +10,14 @@ const initialState = {
 
 export const getVocabularies = createAsyncThunk(
   "vocabulary/fetch",
-  async (sortType = "new") => {
+  async (param) => {
     try {
-      const { data } = await axios.get(`/vocabularies?sort=${sortType}`);
+      const sortType = param?.sortType || "new";
+      const page = param?.page || 1;
+
+      const { data } = await axios.get(
+        `/vocabularies?sort=${sortType}&page=${page}`
+      );
       return data;
     } catch (err) {
       console.log(err);

@@ -10,6 +10,23 @@
   .modal {
     @apply w-4/5 md:w-[30%] bg-white fixed z-20 top-1/2  left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-md;
   }
+
+  .pagination {
+    @apply flex justify-center items-center mt-5;
+  }
+
+  .pagination__page,.pagination__page--prev, .pagination__page--next, .pagination__page--break {
+    @apply px-5 py-3 bg-white border
+  }
+
+  .pagination__page--disabled, .pagination__page--disabled-link {
+    @apply bg-gray-200 cursor-default;
+  }
+
+  .pagination__page--active {
+    @apply bg-primary text-white;
+  }
+  
 }
 
 body {

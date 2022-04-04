@@ -13,6 +13,7 @@ import VocabularyContext from "../context/VocabularyContext";
 import { MdGridView } from "react-icons/md";
 import { MdOutlineFormatListBulleted } from "react-icons/md";
 import ListView from "../components/vocabulary-list/ListView";
+import ReactPaginate from "react-paginate";
 
 const editModeClass = " transform translate-x-6";
 const VIEW = {
@@ -111,6 +112,22 @@ function VocabularyList() {
           </VocabularyContext.Provider>
         )}
       </div>
+      <ReactPaginate
+        breakLabel="..."
+        nextLabel="&raquo;"
+        pageRangeDisplayed={5}
+        pageCount={10}
+        previousLabel="&laquo;"
+        containerClassName="pagination"
+        pageClassName="pagination__page"
+        activeClassName="pagination__page--active"
+        previousClassName="pagination__page--prev"
+        nextClassName="pagination__page--next"
+        breakClassName="pagination__page--break"
+        disabledClassName="pagination__page--disabled"
+        disabledLinkClassName="pagination__page--disabled-link"
+        renderOnZeroPageCount={null}
+      />
     </div>
   );
 }

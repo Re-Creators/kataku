@@ -4,16 +4,15 @@ import axios from "../../axios";
 const initialState = {
   isFetching: false,
   data: null,
+  pageInfo: null,
   selectedVocabulary: null,
 };
 
 export const getVocabularies = createAsyncThunk(
   "vocabulary/fetch",
-  async (isSort = false) => {
+  async (sortType = "new") => {
     try {
-      const { data } = await axios.get(
-        `/vocabularies${isSort ? "?sort=hafal" : ""}`
-      );
+      const { data } = await axios.get(`/vocabularies?sort=${sortType}`);
       return data;
     } catch (err) {
       console.log(err);
@@ -36,7 +35,8 @@ export const vocabularySlice = createSlice({
     },
     [getVocabularies.fulfilled]: (state, { payload }) => {
       state.isFetching = false;
-      state.data = payload;
+      state.data = payload.vocabularies;
+      state.pageInfo = payload.pageInfo;
     },
   },
 });

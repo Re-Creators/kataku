@@ -14,8 +14,8 @@ import { MdGridView } from "react-icons/md";
 import { MdOutlineFormatListBulleted } from "react-icons/md";
 import ListView from "../components/vocabulary-list/ListView";
 import ReactPaginate from "react-paginate";
+import EditToggle from "../components/vocabulary-list/EditToggle";
 
-const editModeClass = " transform translate-x-6";
 const VIEW = {
   GRID: "grid",
   LIST: "list",
@@ -60,22 +60,10 @@ function VocabularyList() {
       <h1 className="text-3xl">Daftar Kosakata</h1>
       <div className="flex flex-col">
         <div className="flex flex-col-reverse md:flex-row justify-between mt-5 ">
-          <div className="flex gap-2 items-center mt-5 md:mt-0">
-            <div
-              className="w-10 h-4 flex items-center bg-white rounded-full cursor-pointer  "
-              onClick={() => {
-                setEditMode(!editMode);
-              }}
-            >
-              <div
-                className={
-                  "bg-primary h-4 w-4 rounded-full shadow-md transform duration-300 ease-in-out" +
-                  (editMode ? editModeClass : null)
-                }
-              ></div>
-            </div>
-            <div>Edit Mode</div>
-          </div>
+          <EditToggle
+            editMode={editMode}
+            toggleHandler={() => setEditMode(!editMode)}
+          />
           <div className="flex">
             <Filter />
             <div className="flex">

@@ -57,6 +57,7 @@ function VocabularyList() {
       >
         <DeleteVocabularyModal onClose={() => setShowDelModal(false)} />
       </ModalContainer>
+
       <h1 className="text-3xl">Daftar Kosakata</h1>
       <div className="flex flex-col">
         <div className="flex flex-col-reverse md:flex-row justify-between mt-5 ">

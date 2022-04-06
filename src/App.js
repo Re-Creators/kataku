@@ -11,6 +11,7 @@ import Profile from "./pages/Profile";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { fetchUser } from "./features/user/userSlice";
+import NotFound from "./pages/NotFound";
 
 function App() {
   const dispatch = useDispatch();
@@ -47,6 +48,7 @@ function App() {
             </PublicLayout>
           }
         />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
   );

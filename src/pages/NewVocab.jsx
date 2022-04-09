@@ -46,20 +46,20 @@ function NewVocab() {
         <Notification />
       </CSSTransition>
       <div className="flex flex-col w-full">
-        <div className="mb-10">
-          <label className="block text-2xl mb-6">Inggris</label>
+        <div className="mb-5">
+          <label className="block text-2xl mb-3">Inggris</label>
           <input
             type="text"
-            className=" bg-transparent outline-none border-b-2 border-gray-400 focus:border-primary transition-all duration-300 w-full text-center text-xl text-primary"
+            className=" bg-transparent outline-none border-2 border-gray-400 focus:border-primary transition-all duration-300 w-full text-center text-xl text-primary py-3"
             value={english}
             onChange={(e) => setEnglish(e.target.value)}
           />
         </div>
-        <div className="mb-10">
-          <label className="block text-2xl mb-6">Indonesia</label>
+        <div className="mb-5">
+          <label className="block text-2xl mb-3">Indonesia</label>
           <input
             type="text"
-            className=" bg-transparent outline-none border-b-2 border-gray-400 focus:border-primary transition-all duration-300 w-full text-center text-xl text-primary"
+            className=" bg-transparent outline-none border-2 py-3 border-gray-400 focus:border-primary transition-all duration-300 w-full text-center text-xl text-primary"
             value={indonesia}
             onChange={(e) => setIndonesia(e.target.value)}
           />

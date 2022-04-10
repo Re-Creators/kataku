@@ -2,7 +2,7 @@ import React from "react";
 import DeleteVocabularyModal from "./DeleteVocabularyModal";
 import EditVocabularyModal from "./EditVocabularyModal";
 
-function InfoModal() {
+function InfoModal({ onCLose }) {
   const [showDelete, setShowDelete] = React.useState(false);
 
   const toggleDelete = () => setShowDelete(!showDelete);
@@ -10,9 +10,12 @@ function InfoModal() {
   return (
     <>
       {showDelete ? (
-        <DeleteVocabularyModal toggleDelete={toggleDelete} />
+        <DeleteVocabularyModal
+          toggleDelete={toggleDelete}
+          closeModal={onCLose}
+        />
       ) : (
-        <EditVocabularyModal toggleDelete={toggleDelete} />
+        <EditVocabularyModal toggleDelete={toggleDelete} onCLose={onCLose} />
       )}
     </>
   );

@@ -9,7 +9,7 @@ import axios from "../../axios";
 import { useState } from "react";
 import Spinner from "../Spinner";
 
-function DeleteVocabularyModal({ toggleDelete, onClose }) {
+function DeleteVocabularyModal({ toggleDelete, closeModal }) {
   const dispatch = useDispatch();
   const { selectedVocabulary } = useSelector(vocabularySelector);
   const [loading, setLoading] = useState(false);
@@ -19,9 +19,9 @@ function DeleteVocabularyModal({ toggleDelete, onClose }) {
       setLoading(true);
       await axios.delete(`/vocabularies/${selectedVocabulary._id}`);
 
-      onClose();
       setLoading(false);
       dispatch(getVocabularies());
+      closeModal();
     } catch (err) {
       console.log(err);
     }
@@ -48,7 +48,7 @@ function DeleteVocabularyModal({ toggleDelete, onClose }) {
         </button>
         <button
           className="py-2 bg-red-500 rounded-md text-white w-[100px]"
-          onClick={() => onDelete()}
+          onClick={onDelete}
           disabled={loading}
         >
           {loading ? <Spinner /> : "Hapus"}

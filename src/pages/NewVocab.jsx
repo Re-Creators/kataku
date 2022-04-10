@@ -11,7 +11,7 @@ function NewVocab() {
   const [vocab, setVocab] = useState("");
   const { user } = useSelector(userSelector);
   const [translate, setTranslate] = useState("");
-  const [language, setLanguage] = useState("");
+  const [language, setLanguage] = useState("English");
   const [loading, setLoading] = useState(false);
   const [showNotif, setShowNotif] = useState(false);
 

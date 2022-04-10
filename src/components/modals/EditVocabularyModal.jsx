@@ -7,6 +7,7 @@ import {
 } from "../../features/vocabulary/vocabularySlice";
 import axios from "../../axios";
 import { BiTrash } from "react-icons/bi";
+import Spinner from "../Spinner";
 
 function EditVocabularyModal({ onCLose, toggleDelete }) {
   const dispatch = useDispatch();
@@ -35,6 +36,17 @@ function EditVocabularyModal({ onCLose, toggleDelete }) {
     } catch (err) {
       console.log(err);
     }
+  };
+
+  const diffCheck = () => {
+    if (
+      selectedVocabulary.translate !== translate ||
+      selectedVocabulary.vocab !== vocab ||
+      selectedVocabulary.isCompleted !== isCompleted
+    ) {
+      return false;
+    }
+    return true;
   };
 
   return (
@@ -86,8 +98,12 @@ function EditVocabularyModal({ onCLose, toggleDelete }) {
         </label>
       </div>
       <div className="mb-5">
-        <button className="w-full py-2 bg-primary text-white rounded-md">
-          Update Changes
+        <button
+          className="w-full py-2 bg-primary text-white rounded-md disabled:opacity-75"
+          disabled={diffCheck() || loading}
+          onClick={onUpdate}
+        >
+          {loading ? <Spinner /> : "Update"}
         </button>
       </div>
     </div>

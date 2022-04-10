@@ -8,9 +8,10 @@ import { postData } from "../api";
 import LanguageSelect from "../components/shared/LanguageSelect";
 
 function NewVocab() {
-  const [english, setEnglish] = useState("");
+  const [vocab, setVocab] = useState("");
   const { user } = useSelector(userSelector);
-  const [indonesia, setIndonesia] = useState("");
+  const [translate, setTranslate] = useState("");
+  const [language, setLanguage] = useState("");
   const [loading, setLoading] = useState(false);
   const [showNotif, setShowNotif] = useState(false);
 
@@ -19,14 +20,15 @@ function NewVocab() {
 
     await postData("/vocabularies", {
       userId: user._id,
-      english,
-      indonesia,
+      vocab,
+      translate,
+      language,
     });
 
     setLoading(false);
     triggerNotification();
-    setIndonesia("");
-    setEnglish("");
+    setTranslate("");
+    setVocab("");
   };
 
   function triggerNotification() {
@@ -49,32 +51,30 @@ function NewVocab() {
       <div className="flex flex-col w-full">
         <div className="mb-5">
           <label className="block text-2xl mb-3">Bahasa</label>
-          <LanguageSelect />
+          <LanguageSelect selectHandler={(value) => setLanguage(value)} />
         </div>
         <div className="mb-5">
           <label className="block text-2xl mb-3">Kosa Kata</label>
           <input
             type="text"
-            className=" bg-transparent outline-none border-2 border-gray-400 focus:border-primary transition-all duration-300 w-full text-center text-xl text-primary py-2"
-            value={english}
-            onChange={(e) => setEnglish(e.target.value)}
+            className=" bg-white outline-none border-2  focus:border-primary transition-all duration-300 w-full text-center text-xl text-primary py-2"
+            value={vocab}
+            onChange={(e) => setVocab(e.target.value)}
           />
         </div>
         <div className="mb-5">
           <label className="block text-2xl mb-3">Terjemahan</label>
           <input
             type="text"
-            className=" bg-transparent outline-none border-2 py-2 border-gray-400 focus:border-primary transition-all duration-300 w-full text-center text-xl text-primary"
-            value={indonesia}
-            onChange={(e) => setIndonesia(e.target.value)}
+            className=" bg-white outline-none border-2 py-2  focus:border-primary transition-all duration-300 w-full text-center text-xl text-primary"
+            value={translate}
+            onChange={(e) => setTranslate(e.target.value)}
           />
         </div>
         <button
           className="bg-primary py-2 px-10 text-white rounded-md hover:shadow-lg transition-all duration-100 disabled:opacity-75 "
           onClick={addVocabulary}
-          disabled={
-            loading || !english.trim().length || !indonesia.trim().length
-          }
+          disabled={loading || !vocab.trim().length || !translate.trim().length}
         >
           {loading ? <Spinner /> : "Tambah"}
         </button>

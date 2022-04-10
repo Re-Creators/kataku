@@ -33,10 +33,10 @@ function VocabularyCard({ vocabulary }) {
       </div>
       <div className="flex items-center justify-center mt-8 flex-col">
         <div className="text-2xl lg:text-2xl xl:text-4xl text-primary font-bold capitalize">
-          {vocabulary.english}
+          {vocabulary.vocab}
         </div>
         <div className="text-lg lg:text-xl xl:text-2xl  font-bold mt-4 capitalize">
-          {vocabulary.indonesia}
+          {vocabulary.translate}
         </div>
       </div>
     </div>

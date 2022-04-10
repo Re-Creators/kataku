@@ -11,8 +11,8 @@ import Spinner from "../Spinner";
 function EditVocabularyModal({ onCLose }) {
   const dispatch = useDispatch();
   const { selectedVocabulary } = useSelector(vocabularySelector);
-  const [indonesia, setIndonesia] = useState(selectedVocabulary.indonesia);
-  const [english, setEnglish] = useState(selectedVocabulary.english);
+  const [translate, setTranslate] = useState(selectedVocabulary.translate);
+  const [vocab, setVocab] = useState(selectedVocabulary.vocab);
   const [isCompleted, setIsCompleted] = useState(
     selectedVocabulary.isCompleted
   );
@@ -23,8 +23,8 @@ function EditVocabularyModal({ onCLose }) {
     try {
       setLoading(true);
       await axios.put(`/vocabularies/${selectedVocabulary._id}`, {
-        english,
-        indonesia,
+        vocab,
+        translate,
         isCompleted,
         ...(selectedVocabulary.isCompleted &&
           !isCompleted && { correctCount: 0 }),
@@ -45,17 +45,17 @@ function EditVocabularyModal({ onCLose }) {
         <input
           type="text"
           className="w-full border-2 mt-2 p-2 outline-none focus:border-primary"
-          value={english}
-          onChange={(e) => setEnglish(e.target.value)}
+          value={vocab}
+          onChange={(e) => setVocab(e.target.value)}
         />
       </div>
       <div className="mb-5">
-        <label>Indonesia</label>
+        <label>translate</label>
         <input
           type="text"
           className="w-full border-2 mt-2 p-2 outline-none focus:border-primary"
-          value={indonesia}
-          onChange={(e) => setIndonesia(e.target.value)}
+          value={translate}
+          onChange={(e) => setTranslate(e.target.value)}
         />
       </div>
       <div className="mb-5 flex items-center gap-1">

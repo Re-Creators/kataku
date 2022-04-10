@@ -16,10 +16,13 @@ const customStyles = {
 };
 
 const Control = ({ children, ...props }) => {
-  const flagPath = props.getValue()[0].flag;
+  const flagPath = props.getValue().length ? props.getValue()[0].flag : null;
   return (
     <components.Control {...props}>
-      <img src={flagPath} alt="Flag Languages" className="w-10 h-10 ml-2" />
+      {flagPath && (
+        <img src={flagPath} alt="Flag Languages" className="w-10 h-10 ml-2" />
+      )}
+
       {children}
     </components.Control>
   );
@@ -37,8 +40,8 @@ const Option = (props) => {
 };
 
 const options = [
-  { value: "en", label: "English", flag: "/images/flags/en.png" },
-  { value: "ja", label: "Japanese", flag: "/images/flags/japan.png" },
+  { value: "en", label: "English", flag: "/images/flags/English.png" },
+  { value: "ja", label: "Japanese", flag: "/images/flags/Japanese.png" },
 ];
 
 function LanguageSelect({ selectHandler }) {
@@ -51,7 +54,8 @@ function LanguageSelect({ selectHandler }) {
       options={options}
       onChange={changeHandler}
       styles={customStyles}
-      defaultInputValue={options[0].label}
+      isSearchable={false}
+      defaultValue={options[0]}
     />
   );
 }

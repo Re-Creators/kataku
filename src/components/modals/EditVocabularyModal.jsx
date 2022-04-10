@@ -7,6 +7,7 @@ import {
 } from "../../features/vocabulary/vocabularySlice";
 import axios from "../../axios";
 import Spinner from "../Spinner";
+import { BiTrash } from "react-icons/bi";
 
 function EditVocabularyModal({ onCLose }) {
   const dispatch = useDispatch();
@@ -40,20 +41,36 @@ function EditVocabularyModal({ onCLose }) {
 
   return (
     <div className="modal p-10">
+      <div className="absolute top-5 right-5">
+        <button>
+          <BiTrash className="text-xl text-red-500" />
+        </button>
+      </div>
       <div className="mb-5">
-        <label>Inggris</label>
+        <label>Bahasa</label>
+        <div className="flex mt-2">
+          <img
+            src={`/images/flags/${selectedVocabulary.language}.png`}
+            alt="Flag Languages"
+            className="w-8 h-8"
+          />
+          <span className="ml-2">{selectedVocabulary.language}</span>
+        </div>
+      </div>
+      <div className="mb-5">
+        <label>Vocabulary</label>
         <input
           type="text"
-          className="w-full border-2 mt-2 p-2 outline-none focus:border-primary"
+          className="w-full border-2 border-transparent mt-2 p-2 outline-none focus:border-primary"
           value={vocab}
           onChange={(e) => setVocab(e.target.value)}
         />
       </div>
       <div className="mb-5">
-        <label>translate</label>
+        <label>Translate</label>
         <input
           type="text"
-          className="w-full border-2 mt-2 p-2 outline-none focus:border-primary"
+          className="w-full border-2 border-transparent mt-2 p-2 outline-none focus:border-primary"
           value={translate}
           onChange={(e) => setTranslate(e.target.value)}
         />
@@ -70,13 +87,6 @@ function EditVocabularyModal({ onCLose }) {
           Sudah hafal
         </label>
       </div>
-      <button
-        className="py-3 px-10 bg-primary rounded-md text-white mx-auto w-full"
-        onClick={() => onUpdate()}
-        disabled={loading}
-      >
-        {loading ? <Spinner /> : "Simpan"}
-      </button>
     </div>
   );
 }

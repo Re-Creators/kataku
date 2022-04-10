@@ -68,7 +68,7 @@ function EditVocabularyModal({ onCLose, toggleDelete }) {
         </div>
       </div>
       <div className="mb-5">
-        <label>Vocabulary</label>
+        <label>Kosa Kata</label>
         <input
           type="text"
           className="w-full border-2 border-transparent mt-2 p-2 outline-none focus:border-primary"
@@ -77,7 +77,7 @@ function EditVocabularyModal({ onCLose, toggleDelete }) {
         />
       </div>
       <div className="mb-5">
-        <label>Translate</label>
+        <label>Terjemahan</label>
         <input
           type="text"
           className="w-full border-2 border-transparent mt-2 p-2 outline-none focus:border-primary"

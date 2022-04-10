@@ -51,7 +51,10 @@ function NewVocab() {
       <div className="flex flex-col w-full">
         <div className="mb-5">
           <label className="block text-2xl mb-3">Bahasa</label>
-          <LanguageSelect selectHandler={(value) => setLanguage(value)} />
+          <LanguageSelect
+            selectHandler={(value) => setLanguage(value)}
+            paddingSize={10}
+          />
         </div>
         <div className="mb-5">
           <label className="block text-2xl mb-3">Kosa Kata</label>

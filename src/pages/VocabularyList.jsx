@@ -51,8 +51,8 @@ function VocabularyList() {
       <h1 className="text-3xl">Daftar Kosakata</h1>
       <div className="flex flex-col">
         <div className="flex flex-col-reverse md:flex-row justify-between mt-5 ">
-          <div className="w-48">
-            <LanguageSelect selectHandler={() => {}} />
+          <div className="w-[300px]">
+            <LanguageSelect selectHandler={() => {}} paddingSize={8} />
           </div>
           <div className="flex">
             <Filter />

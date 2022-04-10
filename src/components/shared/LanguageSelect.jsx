@@ -1,18 +1,20 @@
 import Select, { components, OptionProps } from "react-select";
 
-const customStyles = {
-  option: (provided) => ({
-    ...provided,
-    padding: 10,
-  }),
-  input: (provided) => ({
-    ...provided,
-    padding: 10,
-  }),
-  singleValue: (provided) => ({
-    ...provided,
-    padding: 10,
-  }),
+const customStyles = (paddingSize) => {
+  return {
+    option: (provided) => ({
+      ...provided,
+      padding: paddingSize,
+    }),
+    input: (provided) => ({
+      ...provided,
+      padding: paddingSize,
+    }),
+    singleValue: (provided) => ({
+      ...provided,
+      padding: paddingSize,
+    }),
+  };
 };
 
 const Control = ({ children, ...props }) => {
@@ -44,7 +46,7 @@ const options = [
   { value: "ja", label: "Japanese", flag: "/images/flags/Japanese.png" },
 ];
 
-function LanguageSelect({ selectHandler }) {
+function LanguageSelect({ selectHandler, paddingSize }) {
   const changeHandler = ({ label }) => {
     selectHandler(label);
   };
@@ -53,7 +55,7 @@ function LanguageSelect({ selectHandler }) {
       components={{ Option, Control }}
       options={options}
       onChange={changeHandler}
-      styles={customStyles}
+      styles={customStyles(paddingSize)}
       isSearchable={false}
       defaultValue={options[0]}
     />

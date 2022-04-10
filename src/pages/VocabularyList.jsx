@@ -5,8 +5,6 @@ import { getVocabularies } from "../features/vocabulary/vocabularySlice";
 import { vocabularySelector } from "../features/vocabulary/vocabularySlice";
 import { useSelector } from "react-redux";
 import ModalContainer from "../components/modals/ModalContainer";
-import EditVocabularyModal from "../components/modals/EditVocabularyModal";
-import DeleteVocabularyModal from "../components/modals/DeleteVocabularyModal";
 import Filter from "../components/Filter";
 import GridView from "../components/vocabulary-list/GridView";
 import VocabularyContext from "../context/VocabularyContext";
@@ -14,7 +12,8 @@ import { MdGridView } from "react-icons/md";
 import { MdOutlineFormatListBulleted } from "react-icons/md";
 import ListView from "../components/vocabulary-list/ListView";
 import ReactPaginate from "react-paginate";
-import EditToggle from "../components/vocabulary-list/EditToggle";
+import InfoModal from "../components/modals/InfoModal";
+import LanguageSelect from "../components/shared/LanguageSelect";
 
 const VIEW = {
   GRID: "grid",
@@ -28,9 +27,7 @@ function VocabularyList() {
     isFetching,
     pageInfo,
   } = useSelector(vocabularySelector);
-  const [showEditModal, setShowEditModal] = useState(false);
-  const [showDelModal, setShowDelModal] = useState(false);
-  const [editMode, setEditMode] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const [view, setView] = useState(VIEW.GRID);
 
   const handlePageClick = (event) => {
@@ -45,26 +42,18 @@ function VocabularyList() {
     <div className="mt-10 w-4/5 mx-auto pb-10">
       <ModalContainer
         transitionName="fade"
-        isModalOpen={showEditModal}
-        onCLose={() => setShowEditModal(false)}
+        isModalOpen={showModal}
+        onCLose={() => setShowModal(false)}
       >
-        <EditVocabularyModal onCLose={() => setShowEditModal(false)} />
-      </ModalContainer>
-      <ModalContainer
-        transitionName="fade"
-        isModalOpen={showDelModal}
-        onCLose={() => setShowDelModal(false)}
-      >
-        <DeleteVocabularyModal onClose={() => setShowDelModal(false)} />
+        <InfoModal onCLose={() => setShowModal(false)} />
       </ModalContainer>
 
       <h1 className="text-3xl">Daftar Kosakata</h1>
       <div className="flex flex-col">
         <div className="flex flex-col-reverse md:flex-row justify-between mt-5 ">
-          <EditToggle
-            editMode={editMode}
-            toggleHandler={() => setEditMode(!editMode)}
-          />
+          <div className="w-48">
+            <LanguageSelect selectHandler={() => {}} />
+          </div>
           <div className="flex">
             <Filter />
             <div className="flex">
@@ -96,9 +85,7 @@ function VocabularyList() {
           <VocabularyContext.Provider
             value={{
               vocabularies,
-              editMode,
-              toggleEditModal: () => setShowEditModal(true),
-              toggleDelModal: () => setShowDelModal(true),
+              showModal: () => setShowModal(true),
             }}
           >
             {view === VIEW.GRID ? (

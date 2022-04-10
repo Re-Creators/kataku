@@ -6,19 +6,17 @@ import {
   vocabularySelector,
 } from "../../features/vocabulary/vocabularySlice";
 import axios from "../../axios";
-import Spinner from "../Spinner";
 import { BiTrash } from "react-icons/bi";
 
-function EditVocabularyModal({ onCLose }) {
+function EditVocabularyModal({ onCLose, toggleDelete }) {
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
   const { selectedVocabulary } = useSelector(vocabularySelector);
   const [translate, setTranslate] = useState(selectedVocabulary.translate);
   const [vocab, setVocab] = useState(selectedVocabulary.vocab);
   const [isCompleted, setIsCompleted] = useState(
     selectedVocabulary.isCompleted
   );
-
-  const [loading, setLoading] = useState(false);
 
   const onUpdate = async () => {
     try {
@@ -42,7 +40,7 @@ function EditVocabularyModal({ onCLose }) {
   return (
     <div className="modal p-10">
       <div className="absolute top-5 right-5">
-        <button>
+        <button onClick={toggleDelete}>
           <BiTrash className="text-xl text-red-500" />
         </button>
       </div>
@@ -86,6 +84,11 @@ function EditVocabularyModal({ onCLose }) {
         <label className="text-sm" htmlFor="isCompleted">
           Sudah hafal
         </label>
+      </div>
+      <div className="mb-5">
+        <button className="w-full py-2 bg-primary text-white rounded-md">
+          Update Changes
+        </button>
       </div>
     </div>
   );

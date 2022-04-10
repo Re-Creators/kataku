@@ -9,7 +9,7 @@ import axios from "../../axios";
 import { useState } from "react";
 import Spinner from "../Spinner";
 
-function DeleteVocabularyModal({ onClose }) {
+function DeleteVocabularyModal({ toggleDelete, onClose }) {
   const dispatch = useDispatch();
   const { selectedVocabulary } = useSelector(vocabularySelector);
   const [loading, setLoading] = useState(false);
@@ -28,7 +28,7 @@ function DeleteVocabularyModal({ onClose }) {
   };
   return (
     <div className="modal p-6">
-      <button className="top-5 right-3 absolute" onClick={() => onClose()}>
+      <button className="top-5 right-3 absolute" onClick={toggleDelete}>
         <IoClose fontSize={24} />
       </button>
       <div className="mt-8">
@@ -42,7 +42,7 @@ function DeleteVocabularyModal({ onClose }) {
       <div className="mt-14 flex justify-end">
         <button
           className="px-10 py-2 border-2 mr-3 rounded-md"
-          onClick={() => onClose()}
+          onClick={toggleDelete}
         >
           Batal
         </button>

@@ -1,16 +1,12 @@
-import React, { useContext } from "react";
+import React from "react";
 import { BsCalendar3 } from "react-icons/bs";
-import VocabularyContext from "../../context/VocabularyContext";
 import useBadge from "../../hooks/useBadge";
-import EditOption from "../shared/EditOption";
 
 function ListCard({ vocabulary }) {
   const { showBadge, badgeText } = useBadge(vocabulary);
-  const { editMode } = useContext(VocabularyContext);
-
   return (
     <div className="mt-5 flex flex-col hover:shadow-lg transition-shadow duration-300 relative cursor-pointer">
-      {showBadge && !editMode && (
+      {showBadge && (
         <div className="absolute top-1 -right-3 w-20 h-14">
           <img
             src={`/images/${badgeText}-badge.svg`}
@@ -23,8 +19,6 @@ function ListCard({ vocabulary }) {
           </p>
         </div>
       )}
-
-      {editMode && <EditOption vocabulary={vocabulary} />}
 
       <div className="bg-white shadow-md rounded-md p-5">
         <div className="flex items-center text-gray-400 gap-2">

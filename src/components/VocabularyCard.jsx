@@ -1,25 +1,17 @@
 import { useContext } from "react";
 import { BsCalendar3 } from "react-icons/bs";
-import { useDispatch } from "react-redux";
 import VocabularyContext from "../context/VocabularyContext";
-import { setSelectedVocabulary } from "../features/vocabulary/vocabularySlice";
 
 import useBadge from "../hooks/useBadge";
 
 function VocabularyCard({ vocabulary }) {
-  const dispatch = useDispatch();
   const { showBadge, badgeText } = useBadge(vocabulary);
   const { showModal } = useContext(VocabularyContext);
-
-  const modalHandler = () => {
-    dispatch(setSelectedVocabulary(vocabulary));
-    showModal();
-  };
 
   return (
     <div
       className="mb-5 md:mb-0 h-52 bg-white p-5 rounded-md cursor-pointer hover:shadow-lg transition-shadow duration-300 relative"
-      onClick={modalHandler}
+      onClick={() => showModal(vocabulary)}
     >
       {showBadge && (
         <div className="absolute top-1 -right-3 w-20 h-14">

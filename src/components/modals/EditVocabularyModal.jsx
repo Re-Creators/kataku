@@ -103,7 +103,7 @@ function EditVocabularyModal({ onCLose, toggleDelete }) {
           disabled={diffCheck() || loading}
           onClick={onUpdate}
         >
-          {loading ? <Spinner /> : "Update"}
+          {loading ? <Spinner /> : "Simpan Perubahan"}
         </button>
       </div>
     </div>

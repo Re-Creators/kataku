@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Spinner from "../components/Spinner";
 import { useDispatch } from "react-redux";
-import { getVocabularies } from "../features/vocabulary/vocabularySlice";
+import {
+  getVocabularies,
+  setSelectedVocabulary,
+} from "../features/vocabulary/vocabularySlice";
 import { vocabularySelector } from "../features/vocabulary/vocabularySlice";
 import { useSelector } from "react-redux";
 import ModalContainer from "../components/modals/ModalContainer";
@@ -32,6 +35,11 @@ function VocabularyList() {
 
   const handlePageClick = (event) => {
     dispatch(getVocabularies({ page: event.selected + 1 }));
+  };
+
+  const modalHandler = (vocabulary) => {
+    dispatch(setSelectedVocabulary(vocabulary));
+    setShowModal(true);
   };
 
   useEffect(() => {
@@ -85,7 +93,7 @@ function VocabularyList() {
           <VocabularyContext.Provider
             value={{
               vocabularies,
-              showModal: () => setShowModal(true),
+              showModal: (v) => modalHandler(v),
             }}
           >
             {view === VIEW.GRID ? (

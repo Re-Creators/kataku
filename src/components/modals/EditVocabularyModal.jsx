@@ -58,7 +58,7 @@ function EditVocabularyModal({ onCLose, toggleDelete }) {
       </div>
       <div className="mb-5">
         <label>Bahasa</label>
-        <div className="flex mt-2">
+        <div className="flex mt-2 items-center">
           <img
             src={`/images/flags/${selectedVocabulary.language}.png`}
             alt="Flag Languages"

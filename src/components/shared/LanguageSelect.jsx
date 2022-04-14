@@ -1,10 +1,11 @@
-import Select, { components, OptionProps } from "react-select";
+import Select, { components } from "react-select";
 
 const customStyles = (paddingSize) => {
   return {
     option: (provided) => ({
       ...provided,
       padding: paddingSize,
+      textTransform: "capitalize",
     }),
     input: (provided) => ({
       ...provided,
@@ -13,6 +14,7 @@ const customStyles = (paddingSize) => {
     singleValue: (provided) => ({
       ...provided,
       padding: paddingSize,
+      textTransform: "capitalize",
     }),
   };
 };
@@ -41,12 +43,7 @@ const Option = (props) => {
   );
 };
 
-const options = [
-  { value: "en", label: "English", flag: "/images/flags/English.png" },
-  { value: "ja", label: "Japanese", flag: "/images/flags/Japanese.png" },
-];
-
-function LanguageSelect({ selectHandler, paddingSize }) {
+function LanguageSelect({ selectHandler, paddingSize, options }) {
   const changeHandler = ({ label }) => {
     selectHandler(label);
   };

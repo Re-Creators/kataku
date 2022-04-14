@@ -17,6 +17,8 @@ import ListView from "../components/vocabulary-list/ListView";
 import ReactPaginate from "react-paginate";
 import InfoModal from "../components/modals/InfoModal";
 import LanguageSelect from "../components/shared/LanguageSelect";
+import { languageSelector } from "../features/user/userSlice";
+import { genLanguageOption } from "../helpers/option";
 
 const VIEW = {
   GRID: "grid",
@@ -30,8 +32,10 @@ function VocabularyList() {
     isFetching,
     pageInfo,
   } = useSelector(vocabularySelector);
+  const languages = useSelector(languageSelector);
   const [showModal, setShowModal] = useState(false);
   const [view, setView] = useState(VIEW.GRID);
+  const [options] = useState(genLanguageOption(languages));
 
   const handlePageClick = (event) => {
     dispatch(getVocabularies({ page: event.selected + 1 }));
@@ -60,7 +64,11 @@ function VocabularyList() {
       <div className="flex flex-col">
         <div className="flex flex-col-reverse md:flex-row justify-between mt-5 ">
           <div className="w-[300px]">
-            <LanguageSelect selectHandler={() => {}} paddingSize={8} />
+            <LanguageSelect
+              selectHandler={() => {}}
+              paddingSize={8}
+              options={options}
+            />
           </div>
           <div className="flex">
             <Filter />

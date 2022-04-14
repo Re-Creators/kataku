@@ -96,6 +96,13 @@ const userSlice = createSlice({
     updateUser: (state, { payload }) => {
       state.user = payload;
     },
+    updateUserLanguages: (state, { payload }) => {
+      payload.forEach((item) => {
+        if (!state.user.languages.includes(item)) {
+          state.user.languages.push(item);
+        }
+      });
+    },
   },
   extraReducers: {
     [signup.fulfilled]: (state, { payload }) => {
@@ -140,7 +147,9 @@ const userSlice = createSlice({
   },
 });
 
-export const { clearState, logout, updateUser } = userSlice.actions;
+export const { clearState, logout, updateUser, updateUserLanguages } =
+  userSlice.actions;
 
 export const userSelector = (state) => state.user;
+export const languageSelector = (state) => state.user.user.languages;
 export default userSlice.reducer;

@@ -2,12 +2,14 @@ import { useState } from "react";
 import Notification from "../components/Notification";
 import Spinner from "../components/Spinner";
 import { CSSTransition } from "react-transition-group";
-import { useSelector } from "react-redux";
-import { userSelector } from "../features/user/userSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { updateUserLanguages, userSelector } from "../features/user/userSlice";
 import { postData } from "../api";
 import LanguageSelect from "../components/shared/LanguageSelect";
+import { options } from "../constants/languageOptions";
 
 function NewVocab() {
+  const dispatch = useDispatch();
   const [vocab, setVocab] = useState("");
   const { user } = useSelector(userSelector);
   const [translate, setTranslate] = useState("");
@@ -18,12 +20,13 @@ function NewVocab() {
   const addVocabulary = async () => {
     setLoading(true);
 
-    await postData("/vocabularies", {
+    const { data } = await postData("/vocabularies", {
       userId: user._id,
       vocab,
       translate,
       language,
     });
+    dispatch(updateUserLanguages(data.data));
 
     setLoading(false);
     triggerNotification();
@@ -54,6 +57,7 @@ function NewVocab() {
           <LanguageSelect
             selectHandler={(value) => setLanguage(value)}
             paddingSize={10}
+            options={options}
           />
         </div>
         <div className="mb-5">

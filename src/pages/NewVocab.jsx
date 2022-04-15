@@ -42,7 +42,7 @@ function NewVocab() {
     }, 1500);
   }
   return (
-    <div className="flex items-center mx-auto w-4/5 md:w-[30%]  justify-center h-screen min-h-[400px] max-h-[600px]">
+    <div className="flex items-center mx-auto w-4/5 md:w-2/5 lg::w-[30%]  justify-center h-screen min-h-[400px] max-h-[600px]">
       <CSSTransition
         in={showNotif}
         timeout={500}

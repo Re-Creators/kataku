@@ -1,11 +1,10 @@
 const langImage = {
-  english: "https://countryflagsapi.com/svg/us",
-  indonesia: "https://countryflagsapi.com/svg/id",
-  china: "https://countryflagsapi.com/svg/cn",
-  japanese: "https://countryflagsapi.com/svg/jp",
-  korea: "https://countryflagsapi.com/svg/kr",
-  india: "https://countryflagsapi.com/svg/in",
-  russia: "https://countryflagsapi.com/svg/ru",
+  english: "/images/flags/english.png",
+  china: "/images/flags/china.png",
+  japanese: "/images/flags/japanese.png",
+  korea: "/images/flags/south-korea.png",
+  india: "/images/flags/india.png",
+  russia: "/images/flags/russia.png",
 };
 
 export function genLanguageOption(languages) {

@@ -65,7 +65,9 @@ function VocabularyList() {
         <div className="flex flex-col-reverse md:flex-row justify-between mt-5 ">
           <div className="w-[300px]">
             <LanguageSelect
-              selectHandler={() => {}}
+              selectHandler={(language) =>
+                dispatch(getVocabularies({ language }))
+              }
               paddingSize={8}
               options={options}
             />

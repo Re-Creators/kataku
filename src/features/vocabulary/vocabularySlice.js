@@ -14,10 +14,15 @@ export const getVocabularies = createAsyncThunk(
     try {
       const sortType = param?.sortType || "new";
       const page = param?.page || 1;
+      const language = param?.language || null;
 
-      const { data } = await axios.get(
-        `/vocabularies?sort=${sortType}&page=${page}`
-      );
+      const { data } = await axios.get("/vocabularies", {
+        params: {
+          sort: sortType,
+          page: page,
+          ...(language && { language }),
+        },
+      });
       return data;
     } catch (err) {
       console.log(err);

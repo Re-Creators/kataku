@@ -54,7 +54,7 @@ function LanguageSelect({ selectHandler, paddingSize, options }) {
       onChange={changeHandler}
       styles={customStyles(paddingSize)}
       isSearchable={false}
-      defaultValue={options[0]}
+      placeholder="Pilih Bahasa"
     />
   );
 }

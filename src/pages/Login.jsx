@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { HiOutlineMail } from "react-icons/hi";
 import { useForm } from "react-hook-form";
@@ -18,7 +17,7 @@ function Login() {
     formState: { errors },
     setError,
   } = useForm();
-  const { isFetching, isSuccess } = useSelector(userSelector);
+  const { isFetching } = useSelector(userSelector);
 
   const onSubmit = async (data) => {
     try {

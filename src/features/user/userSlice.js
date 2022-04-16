@@ -8,8 +8,6 @@ const initialState = {
   user: null,
   isFetching: false,
   isSuccess: false,
-  isError: false,
-  errorMessage: "",
 };
 
 export const signup = createAsyncThunk(
@@ -23,14 +21,11 @@ export const signup = createAsyncThunk(
 
       if (status === 200) {
         localStorage.setItem("kataku_token", data.token);
-        console.log(data.user);
-
         return data.user;
       } else {
         return thunkAPI.rejectWithValue(data);
       }
     } catch (e) {
-      console.log(e.response.data);
       return thunkAPI.rejectWithValue(e.response.data);
     }
   }
@@ -72,7 +67,6 @@ export const login = createAsyncThunk(
         return thunkAPI.rejectWithValue(data);
       }
     } catch (e) {
-      console.log(e.response.data);
       return thunkAPI.rejectWithValue(e.response.data);
     }
   }
@@ -82,14 +76,7 @@ const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    clearState: (state) => {
-      state.isError = false;
-      state.isSuccess = false;
-      state.isFetching = false;
-
-      return state;
-    },
-    logout: (state) => {
+    logout: () => {
       localStorage.clear();
       window.location.href = document.location.origin + "/login";
     },
@@ -113,21 +100,16 @@ const userSlice = createSlice({
     [signup.pending]: (state) => {
       state.isFetching = true;
     },
-    [signup.rejected]: (state, { payload }) => {
+    [signup.rejected]: (state) => {
       state.isFetching = false;
-      state.isError = true;
-      state.errorMessage = payload;
     },
     [login.fulfilled]: (state, { payload }) => {
       state.user = payload;
       state.isFetching = false;
       state.isSuccess = true;
-      return state;
     },
-    [login.rejected]: (state, { payload }) => {
+    [login.rejected]: (state) => {
       state.isFetching = false;
-      state.isError = true;
-      state.errorMessage = payload;
     },
     [login.pending]: (state) => {
       state.isFetching = true;
@@ -142,13 +124,11 @@ const userSlice = createSlice({
     },
     [fetchUser.rejected]: (state) => {
       state.isFetching = false;
-      state.isError = true;
     },
   },
 });
 
-export const { clearState, logout, updateUser, updateUserLanguages } =
-  userSlice.actions;
+export const { logout, updateUser, updateUserLanguages } = userSlice.actions;
 
 export const userSelector = (state) => state.user;
 export const languageSelector = (state) => state.user.user.languages;

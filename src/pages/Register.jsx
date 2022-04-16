@@ -7,9 +7,8 @@ import { useDispatch } from "react-redux";
 import { signup } from "../features/user/userSlice";
 import { userSelector } from "../features/user/userSlice";
 import { useSelector } from "react-redux";
-import { useEffect } from "react";
 import Spinner from "../components/Spinner";
-import { clearState } from "../features/user/userSlice";
+import ValidationMessage from "../components/shared/ValidationMessage";
 
 function Register() {
   const dispatch = useDispatch();
@@ -17,25 +16,25 @@ function Register() {
   const {
     handleSubmit,
     register,
+    setError,
     formState: { errors },
   } = useForm();
-  const { isFetching, isSuccess, errorMessage, isError } =
-    useSelector(userSelector);
+  const { isFetching } = useSelector(userSelector);
 
-  useEffect(() => {
-    if (isError) {
-      dispatch(clearState());
-    }
-
-    if (isSuccess) {
-      dispatch(clearState());
+  const onSubmit = async (data) => {
+    try {
+      await dispatch(signup(data)).unwrap();
       navigate("/");
+    } catch (err) {
+      if (err.email) {
+        setError("email", {
+          type: "server",
+          message: err.email,
+        });
+      }
     }
-  }, [isError, isSuccess, navigate, dispatch]);
+  };
 
-  function onSubmit(data) {
-    dispatch(signup(data));
-  }
   return (
     <div className="flex justify-center items-center min-h-screen">
       <div className="w-4/5 md:w-2/5 py-5 px-10 bg-white flex flex-col rounded-md shadow-lg">
@@ -67,11 +66,7 @@ function Register() {
                 />
               </div>
             </div>
-            {errors?.username && (
-              <p className="text-sm text-red-500 italic mt-1">
-                {errors.username.message}
-              </p>
-            )}
+            <ValidationMessage error={errors?.username} />
 
             <div className="mt-5">
               <label className="">Email</label>
@@ -87,14 +82,7 @@ function Register() {
                 />
               </div>
             </div>
-            {errors?.email && (
-              <p className="text-sm text-red-500 italic mt-1">
-                {errors.email.message}
-              </p>
-            )}
-            {errorMessage && (
-              <p className="text-sm text-red-500 italic mt-1">{errorMessage}</p>
-            )}
+            <ValidationMessage error={errors?.email} />
 
             <div className="mt-5">
               <label className="">Password</label>
@@ -104,6 +92,10 @@ function Register() {
                   className="mt-2 w-full outline-none border-2 border-gray-500 rounded-md py-2 px-2 pl-12"
                   {...register("password", {
                     required: "Kata sandi harus diisi",
+                    minLength: {
+                      value: 6,
+                      message: "Password harus lebih dari 6 karakter",
+                    },
                   })}
                 />
                 <IoMdLock
@@ -112,15 +104,11 @@ function Register() {
                 />
               </div>
             </div>
-            {errors?.password && (
-              <p className="text-sm text-red-500 italic mt-1">
-                {errors.password.message}
-              </p>
-            )}
+            <ValidationMessage error={errors?.password} />
             <div className="flex items-center  mt-10 justify-center">
               <button
                 type="submit"
-                className="w-full py-3 bg-primary rounded-md text-white cursor-pointer"
+                className="w-full py-3 bg-primary rounded-md text-white cursor-pointer disabled:cursor-default"
                 disabled={isFetching}
               >
                 {isFetching ? <Spinner /> : "Daftar"}

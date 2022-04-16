@@ -1,12 +1,13 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { HiOutlineMail } from "react-icons/hi";
 import { useForm } from "react-hook-form";
 import { IoMdLock } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
-import { userSelector, login, clearState } from "../features/user/userSlice";
+import { userSelector, login } from "../features/user/userSlice";
 import { useNavigate } from "react-router-dom";
 import Spinner from "../components/Spinner";
+import ValidationMessage from "../components/shared/ValidationMessage";
 
 function Login() {
   const dispatch = useDispatch();
@@ -15,24 +16,29 @@ function Login() {
     handleSubmit,
     register,
     formState: { errors },
+    setError,
   } = useForm();
-  const { isFetching, isSuccess, isError, errorMessage } =
-    useSelector(userSelector);
+  const { isFetching, isSuccess } = useSelector(userSelector);
 
-  function onSubmit(data) {
-    dispatch(login(data));
-  }
-
-  useEffect(() => {
-    if (isError) {
-      dispatch(clearState());
-    }
-
-    if (isSuccess) {
-      dispatch(clearState());
+  const onSubmit = async (data) => {
+    try {
+      await dispatch(login(data)).unwrap();
       navigate("/");
+    } catch (err) {
+      if (err.email) {
+        setError("email", {
+          type: "server",
+          message: err.email,
+        });
+      }
+      if (err.password) {
+        setError("password", {
+          type: "server",
+          message: err.password,
+        });
+      }
     }
-  }, [isError, isSuccess, navigate, dispatch]);
+  };
   return (
     <div className="flex justify-center items-center h-screen md:min-h-[600px]">
       <div className="w-4/5 md:w-2/5 py-5 px-10 bg-white flex flex-col rounded-md shadow-lg">
@@ -56,11 +62,7 @@ function Login() {
                   className="absolute left-3 top-1/2 mt-1 -translate-y-1/2 text-gray-500"
                 />
               </div>
-              {errors?.email && (
-                <p className="text-sm text-red-500 italic mt-1">
-                  Email harus diisi!
-                </p>
-              )}
+              <ValidationMessage error={errors?.email} />
             </div>
             <div className="mt-5">
               <label className="">Password</label>
@@ -75,21 +77,12 @@ function Login() {
                   className="absolute left-3 top-1/2 mt-1 -translate-y-1/2 text-gray-500"
                 />
               </div>
-              {errors?.password && (
-                <p className="text-sm text-red-500 italic mt-1">
-                  Password harus diisi
-                </p>
-              )}
-              {errorMessage && (
-                <p className="text-sm text-red-500 italic mt-1">
-                  {errorMessage}
-                </p>
-              )}
+              <ValidationMessage error={errors?.password} />
             </div>
             <div className="flex items-center  mt-10 justify-center">
               <button
                 type="submit"
-                className="w-full py-3 bg-primary rounded-md text-white cursor-pointer"
+                className="w-full py-3 bg-primary rounded-md text-white cursor-pointer disabled:cursor-default"
                 disabled={isFetching}
               >
                 {isFetching ? <Spinner /> : "Masuk"}

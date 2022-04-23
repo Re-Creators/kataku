@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom"
 import Spinner from "../components/Spinner"
 import InputContainer from "../components/shared/InputContainer"
 import Logo from "../components/shared/Logo"
+import SubmitButton from "../components/shared/SubmitButton"
 
 function Login() {
   const dispatch = useDispatch()
@@ -70,13 +71,7 @@ function Login() {
               />
             </InputContainer>
             <div className="flex items-center  mt-10 justify-center">
-              <button
-                type="submit"
-                className="w-full py-3 bg-primary rounded-md text-white cursor-pointer disabled:cursor-default"
-                disabled={isFetching}
-              >
-                {isFetching ? <Spinner /> : "Masuk"}
-              </button>
+              <SubmitButton disabled={isFetching} loading={isFetching} text="Masuk" />
             </div>
           </form>
         </div>

@@ -1,42 +1,37 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
-import {
-  getVocabularies,
-  vocabularySelector,
-} from "../../features/vocabulary/vocabularySlice";
-import axios from "../../axios";
-import { BiTrash } from "react-icons/bi";
-import Spinner from "../Spinner";
+import React, { useState } from "react"
+import { useDispatch } from "react-redux"
+import { useSelector } from "react-redux"
+import { getVocabularies, vocabularySelector } from "../../features/vocabulary/vocabularySlice"
+import axios from "../../axios"
+import { BiTrash } from "react-icons/bi"
+import Spinner from "../Spinner"
+import SubmitButton from "../shared/SubmitButton"
 
 function EditVocabularyModal({ onCLose, toggleDelete }) {
-  const dispatch = useDispatch();
-  const [loading, setLoading] = useState(false);
-  const { selectedVocabulary } = useSelector(vocabularySelector);
-  const [translate, setTranslate] = useState(selectedVocabulary.translate);
-  const [vocab, setVocab] = useState(selectedVocabulary.vocab);
-  const [isCompleted, setIsCompleted] = useState(
-    selectedVocabulary.isCompleted
-  );
+  const dispatch = useDispatch()
+  const [loading, setLoading] = useState(false)
+  const { selectedVocabulary } = useSelector(vocabularySelector)
+  const [translate, setTranslate] = useState(selectedVocabulary.translate)
+  const [vocab, setVocab] = useState(selectedVocabulary.vocab)
+  const [isCompleted, setIsCompleted] = useState(selectedVocabulary.isCompleted)
 
   const onUpdate = async () => {
     try {
-      setLoading(true);
+      setLoading(true)
       await axios.put(`/vocabularies/${selectedVocabulary._id}`, {
         vocab,
         translate,
         isCompleted,
-        ...(selectedVocabulary.isCompleted &&
-          !isCompleted && { correctCount: 0 }),
-      });
+        ...(selectedVocabulary.isCompleted && !isCompleted && { correctCount: 0 }),
+      })
 
-      setLoading(false);
-      dispatch(getVocabularies());
-      onCLose();
+      setLoading(false)
+      dispatch(getVocabularies())
+      onCLose()
     } catch (err) {
-      console.log(err);
+      console.log(err)
     }
-  };
+  }
 
   const diffCheck = () => {
     if (
@@ -44,10 +39,10 @@ function EditVocabularyModal({ onCLose, toggleDelete }) {
       selectedVocabulary.vocab !== vocab ||
       selectedVocabulary.isCompleted !== isCompleted
     ) {
-      return false;
+      return false
     }
-    return true;
-  };
+    return true
+  }
 
   return (
     <div className="modal p-10">
@@ -98,16 +93,16 @@ function EditVocabularyModal({ onCLose, toggleDelete }) {
         </label>
       </div>
       <div className="mb-5">
-        <button
-          className="w-full py-2 bg-primary text-white rounded-md disabled:opacity-75"
+        <SubmitButton
+          handleClick={onUpdate}
+          loading={loading}
           disabled={diffCheck() || loading}
-          onClick={onUpdate}
-        >
-          {loading ? <Spinner /> : "Simpan Perubahan"}
-        </button>
+          text="Simpan Perubahan"
+          extraClassName="w-full"
+        />
       </div>
     </div>
-  );
+  )
 }
 
-export default EditVocabularyModal;
+export default EditVocabularyModal

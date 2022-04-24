@@ -1,6 +1,5 @@
 import { useState } from "react"
 import Notification from "../components/Notification"
-import Spinner from "../components/Spinner"
 import { CSSTransition } from "react-transition-group"
 import { useDispatch, useSelector } from "react-redux"
 import { updateUserLanguages, userSelector } from "../features/user/userSlice"

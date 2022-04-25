@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from "react"
+import { useSelector } from "react-redux"
 import {
   Area,
   AreaChart,
@@ -9,11 +9,11 @@ import {
   Tooltip,
   ResponsiveContainer,
   Label,
-} from "recharts";
-import axios from "../axios";
-import Spinner from "../components/Spinner";
-import { userSelector } from "../features/user/userSlice";
-import { greetTime } from "../helpers";
+} from "recharts"
+import axios from "../axios"
+import Spinner from "../components/Spinner"
+import { userSelector } from "../features/user/userSlice"
+import { greetTime } from "../helpers"
 
 const monthNames = [
   "Januari",
@@ -28,32 +28,30 @@ const monthNames = [
   "Oktober",
   "November",
   "Desember",
-];
+]
 function Home() {
-  const [data, setData] = useState(null);
-  const { user } = useSelector(userSelector);
+  const [data, setData] = useState(null)
+  const { user } = useSelector(userSelector)
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const { data } = await axios.get("vocabularies/stats");
-        setData(data);
-        return data;
+        const { data } = await axios.get("vocabularies/stats")
+        setData(data)
+        return data
       } catch (err) {
-        console.log(err);
+        console.log(err)
       }
     }
-    fetchData();
-  }, []);
+    fetchData()
+  }, [])
   return (
     <div className="w-4/5 mx-auto mt-14 pb-10">
       <div className="">
         <h1 className="text-3xl font-bold capitalize">
           Selamat {greetTime()}, {user?.username}
         </h1>
-        <p className="text-gray-500 text-sm mt-2">
-          Ini adalah ringkasan kosa kata kamu.
-        </p>
+        <p className="text-gray-500 text-sm mt-2">Ini adalah ringkasan kosa kata kamu.</p>
       </div>
       {!data ? (
         <div className="w-full mt-10 flex items-center justify-center">
@@ -69,9 +67,7 @@ function Home() {
               <h2 className="font-semibold text-lg">{data?.today.length}</h2>
             </div>
             <div className="w-[48%] md:w-72 text-center py-10 px-3 bg-white shadow-md rounded-md">
-              <h1 className="mb-2 font-bold text-base md:text-xl text-primary">
-                Semua Kosa Kata
-              </h1>
+              <h1 className="mb-2 font-bold text-base md:text-xl text-primary">Semua Kosa Kata</h1>
               <h2 className="font-semibold text-lg">{data?.all.total}</h2>
             </div>
             <div className="w-full mt-2 md:mt-0  md:w-72 text-center py-10 px-3 bg-white shadow-md rounded-md">
@@ -87,14 +83,14 @@ function Home() {
               <div className="flex gap-3 md:gap-8 mt-3 flex-wrap">
                 {data?.today.map((vocabulary) => (
                   <div
-                    className="w-full md:w-80 text-center py-10 px-5  bg-white shadow-md rounded-md"
+                    className="w-full md:w-80 text-center py-8 px-5  bg-white shadow-md rounded-md"
                     key={vocabulary._id}
                   >
-                    <h1 className="mb-2 font-bold text-base md:text-xl text-primary capitalize">
-                      {vocabulary.english}
+                    <h1 className="mb-2 font-bold text-base md:text-xl text-primary capitalize w-full line-clamp-1">
+                      {vocabulary.vocab}
                     </h1>
-                    <h2 className="font-semibold text-sm md:text-lg capitalize">
-                      {vocabulary.indonesia}
+                    <h2 className="font-semibold text-sm md:text-lg capitalize line-clamp-2">
+                      {vocabulary.translate}
                     </h2>
                   </div>
                 ))}
@@ -117,11 +113,7 @@ function Home() {
                 >
                   <CartesianGrid strokeDasharray="2 2" />
                   <XAxis dataKey="_id" stroke="#728aa1">
-                    <Label
-                      value="Tanggal"
-                      offset={-10}
-                      position="insideBottom"
-                    />
+                    <Label value="Tanggal" offset={-10} position="insideBottom" />
                   </XAxis>
                   <YAxis
                     stroke="#728aa1"
@@ -149,8 +141,8 @@ function Home() {
               <ResponsiveContainer width="100%" height="100%">
                 <AreaChart
                   data={data.month.map((vocabulary) => {
-                    vocabulary._id = monthNames[vocabulary._id - 1];
-                    return vocabulary;
+                    vocabulary._id = monthNames[vocabulary._id - 1]
+                    return vocabulary
                   })}
                   margin={{
                     top: 30,
@@ -186,7 +178,7 @@ function Home() {
         </>
       )}
     </div>
-  );
+  )
 }
 
-export default Home;
+export default Home

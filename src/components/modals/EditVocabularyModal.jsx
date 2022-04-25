@@ -4,7 +4,6 @@ import { useSelector } from "react-redux"
 import { getVocabularies, vocabularySelector } from "../../features/vocabulary/vocabularySlice"
 import axios from "../../axios"
 import { BiTrash } from "react-icons/bi"
-import Spinner from "../Spinner"
 import SubmitButton from "../shared/SubmitButton"
 
 function EditVocabularyModal({ onCLose, toggleDelete }) {
@@ -59,7 +58,7 @@ function EditVocabularyModal({ onCLose, toggleDelete }) {
             alt="Flag Languages"
             className="w-8 h-8"
           />
-          <span className="ml-2">{selectedVocabulary.language}</span>
+          <span className="ml-2 capitalize">{selectedVocabulary.language}</span>
         </div>
       </div>
       <div className="mb-5">

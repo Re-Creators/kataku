@@ -26,7 +26,7 @@ function NewVocab() {
       translate,
       language,
     })
-    dispatch(updateUserLanguages(data.data))
+    dispatch(updateUserLanguages(data.languages))
 
     setLoading(false)
     triggerNotification()

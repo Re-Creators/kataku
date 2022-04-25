@@ -1,54 +1,46 @@
-import React, { useEffect, useState } from "react";
-import Spinner from "../components/Spinner";
-import { useDispatch } from "react-redux";
-import {
-  getVocabularies,
-  setSelectedVocabulary,
-} from "../features/vocabulary/vocabularySlice";
-import { vocabularySelector } from "../features/vocabulary/vocabularySlice";
-import { useSelector } from "react-redux";
-import ModalContainer from "../components/modals/ModalContainer";
-import Filter from "../components/Filter";
-import GridView from "../components/vocabulary-list/GridView";
-import VocabularyContext from "../context/VocabularyContext";
-import { MdGridView } from "react-icons/md";
-import { MdOutlineFormatListBulleted } from "react-icons/md";
-import ListView from "../components/vocabulary-list/ListView";
-import ReactPaginate from "react-paginate";
-import InfoModal from "../components/modals/InfoModal";
-import LanguageSelect from "../components/shared/LanguageSelect";
-import { languageSelector } from "../features/user/userSlice";
-import { genLanguageOption } from "../helpers/option";
+import React, { useEffect, useState } from "react"
+import Spinner from "../components/Spinner"
+import { useDispatch } from "react-redux"
+import { getVocabularies, setSelectedVocabulary } from "../features/vocabulary/vocabularySlice"
+import { vocabularySelector } from "../features/vocabulary/vocabularySlice"
+import { useSelector } from "react-redux"
+import ModalContainer from "../components/modals/ModalContainer"
+import Filter from "../components/Filter"
+import GridView from "../components/vocabulary-list/GridView"
+import VocabularyContext from "../context/VocabularyContext"
+import { MdGridView } from "react-icons/md"
+import { MdOutlineFormatListBulleted } from "react-icons/md"
+import ListView from "../components/vocabulary-list/ListView"
+import ReactPaginate from "react-paginate"
+import InfoModal from "../components/modals/InfoModal"
+import LanguageSelect from "../components/shared/LanguageSelect"
+import { languageSelector } from "../features/user/userSlice"
+import { genLanguageOption } from "../helpers/option"
 
 const VIEW = {
   GRID: "grid",
   LIST: "list",
-};
+}
 
 function VocabularyList() {
-  const dispatch = useDispatch();
-  const {
-    data: vocabularies,
-    isFetching,
-    pageInfo,
-  } = useSelector(vocabularySelector);
-  const languages = useSelector(languageSelector);
-  const [showModal, setShowModal] = useState(false);
-  const [view, setView] = useState(VIEW.GRID);
-  const [options] = useState(genLanguageOption(languages));
+  const dispatch = useDispatch()
+  const { data: vocabularies, isFetching, pageInfo } = useSelector(vocabularySelector)
+  const options = useSelector(languageSelector)
+  const [showModal, setShowModal] = useState(false)
+  const [view, setView] = useState(VIEW.GRID)
 
   const handlePageClick = (event) => {
-    dispatch(getVocabularies({ page: event.selected + 1 }));
-  };
+    dispatch(getVocabularies({ page: event.selected + 1 }))
+  }
 
   const modalHandler = (vocabulary) => {
-    dispatch(setSelectedVocabulary(vocabulary));
-    setShowModal(true);
-  };
+    dispatch(setSelectedVocabulary(vocabulary))
+    setShowModal(true)
+  }
 
   useEffect(() => {
-    dispatch(getVocabularies());
-  }, [dispatch]);
+    dispatch(getVocabularies())
+  }, [dispatch])
 
   return (
     <div className="mt-10 w-4/5 mx-auto pb-10">
@@ -65,9 +57,7 @@ function VocabularyList() {
         <div className="flex flex-col-reverse md:flex-row justify-between mt-5 ">
           <div className="w-[300px]">
             <LanguageSelect
-              selectHandler={(language) =>
-                dispatch(getVocabularies({ language }))
-              }
+              selectHandler={(language) => dispatch(getVocabularies({ language }))}
               paddingSize={8}
               options={options}
             />
@@ -76,17 +66,13 @@ function VocabularyList() {
             <Filter />
             <div className="flex">
               <button
-                className={`p-3 rounded-md ${
-                  view === VIEW.LIST ? "bg-primary text-white" : ""
-                }`}
+                className={`p-3 rounded-md ${view === VIEW.LIST ? "bg-primary text-white" : ""}`}
                 onClick={() => setView(VIEW.LIST)}
               >
                 <MdOutlineFormatListBulleted />
               </button>
               <button
-                className={`p-3 rounded-md ${
-                  view === VIEW.GRID ? "bg-primary text-white" : ""
-                }`}
+                className={`p-3 rounded-md ${view === VIEW.GRID ? "bg-primary text-white" : ""}`}
                 onClick={() => setView(VIEW.GRID)}
               >
                 <MdGridView />
@@ -135,7 +121,7 @@ function VocabularyList() {
         />
       )}
     </div>
-  );
+  )
 }
 
-export default VocabularyList;
+export default VocabularyList

@@ -15,7 +15,6 @@ import ReactPaginate from "react-paginate"
 import InfoModal from "../components/modals/InfoModal"
 import LanguageSelect from "../components/shared/LanguageSelect"
 import { languageSelector } from "../features/user/userSlice"
-import { genLanguageOption } from "../helpers/option"
 
 const VIEW = {
   GRID: "grid",
